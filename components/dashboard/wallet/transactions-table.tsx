@@ -14,7 +14,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { createSupabaseBrowserClient } from "@/lib/supabase/browser-client";
+// import { createSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 import { Skeleton } from "@/components/ui/skeleton";
 import { json } from "zod";
 
@@ -52,7 +52,7 @@ async function syncTransactions(
   circleWalletId: string
 ) {
   // 1. Fetch transactions from Circle API
-  console.log(JSON.stringify({circleWalletId}));
+  console.log(JSON.stringify({ circleWalletId }));
   const transactionsResponse = await fetch(
     `${baseUrl}/api/wallet/transactions`,
     {
@@ -66,9 +66,8 @@ async function syncTransactions(
     }
   );
 
-  
   const parsedTransactions: WalletTransactionsResponse =
-  await transactionsResponse.json();
+    await transactionsResponse.json();
 
   if (parsedTransactions.error || !parsedTransactions.transactions) {
     return [];
@@ -152,36 +151,36 @@ const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
   ? process.env.NEXT_PUBLIC_VERCEL_URL
   : "http://localhost:3000";
 
-const supabase = createSupabaseBrowserClient();
+// const supabase = createSupabaseBrowserClient();
 
 // Helper functions for status styling
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
-    case 'complete':
-    case 'success':
-      return 'text-green-500';
-    case 'pending':
-      return 'text-yellow-500';
-    case 'failed':
-    case 'error':
-      return 'text-red-500';
+    case "complete":
+    case "success":
+      return "text-green-500";
+    case "pending":
+      return "text-yellow-500";
+    case "failed":
+    case "error":
+      return "text-red-500";
     default:
-      return 'text-gray-400';
+      return "text-gray-400";
   }
 };
 
 const getStatusIcon = (status: string) => {
   switch (status.toLowerCase()) {
-    case 'complete':
-    case 'success':
-      return '●';
-    case 'pending':
-      return '●';
-    case 'failed':
-    case 'error':
-      return '●';
+    case "complete":
+    case "success":
+      return "●";
+    case "pending":
+      return "●";
+    case "failed":
+    case "error":
+      return "●";
     default:
-      return '●';
+      return "●";
   }
 };
 
@@ -198,8 +197,10 @@ export const Transactions = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data: { user: currentUser } } = await supabase.auth.getUser();
-        
+        const {
+          data: { user: currentUser },
+        } = await supabase.auth.getUser();
+
         if (!currentUser) {
           router.push("/sign-in");
           return;
@@ -213,7 +214,7 @@ export const Transactions = () => {
           .single();
 
         setProfile(profile);
-        
+
         if (profile) {
           // Get wallet data
           const { data: walletData } = await supabase
@@ -223,7 +224,7 @@ export const Transactions = () => {
             .eq("profile_id", profile.id)
             .single();
 
-          setWallet(walletData); 
+          setWallet(walletData);
         }
       } catch (error) {
         console.error("Error fetching wallet data:", error);
@@ -261,10 +262,10 @@ export const Transactions = () => {
   const updateTransactions = async () => {
     // Guard clause: Only proceed if we have all required data
     if (!wallet?.id || !profile?.id || !wallet?.circle_wallet_id) {
-      console.log("Missing required data:", { 
-        walletId: wallet?.id, 
-        profileId: profile?.id, 
-        circleWalletId: wallet?.circle_wallet_id 
+      console.log("Missing required data:", {
+        walletId: wallet?.id,
+        profileId: profile?.id,
+        circleWalletId: wallet?.circle_wallet_id,
       });
       return;
     }
@@ -275,7 +276,7 @@ export const Transactions = () => {
       // Sync and get transactions
       const transactions = await syncTransactions(
         supabase,
-        wallet.id, 
+        wallet.id,
         profile.id,
         wallet.circle_wallet_id
       );
@@ -351,9 +352,6 @@ export const Transactions = () => {
     );
   }
 
-
-
-
   return (
     <>
       <div className="bg-gray-800 rounded-lg mb-4">
@@ -390,13 +388,19 @@ export const Transactions = () => {
                   className="border-b border-gray-700 hover:bg-gray-750 cursor-pointer"
                   key={transaction.id}
                 >
-                  <td className="py-4 px-6 text-sm">{transaction.created_at}</td>
+                  <td className="py-4 px-6 text-sm">
+                    {transaction.created_at}
+                  </td>
                   <td className="py-4 px-6 text-sm font-medium">
                     {transaction.transaction_type === "INBOUND" && (
-                      <span className="text-green-600">+{transaction.amount}</span>
+                      <span className="text-green-600">
+                        +{transaction.amount}
+                      </span>
                     )}
                     {transaction.transaction_type === "DEPOSIT_PAYMENT" && (
-                      <span className="text-red-600">-{transaction.amount}</span>
+                      <span className="text-red-600">
+                        -{transaction.amount}
+                      </span>
                     )}
                     {transaction.transaction_type !== "DEPOSIT_PAYMENT" &&
                       transaction.transaction_type !== "INBOUND" && (

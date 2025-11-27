@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PaperClipIcon } from "@heroicons/react/24/solid";
 import { Send, X, Phone, Video } from "lucide-react";
 import { useEffect, useMemo, useState, ChangeEvent } from "react";
-import { createSupabaseBrowserClient } from "@/lib/supabase/browser-client";
+// import { createSupabaseBrowserClient } from "@/lib/supabase/browser-client";
 import { format, formatDistanceToNow } from "date-fns";
 import { Message, Presence, ChatSidebarProps } from "./types";
 import VideoCallModal from "./VideoCallModal";
@@ -15,7 +15,7 @@ export default function ChatSidebar({
   counterpartyName,
   onClose,
 }: ChatSidebarProps) {
-  const supabase = useMemo(() => createSupabaseBrowserClient(), []);
+  // const supabase = useMemo(() => createSupabaseBrowserClient(), []);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [isSending, setIsSending] = useState(false);
@@ -326,8 +326,6 @@ export default function ChatSidebar({
     }
     return "Offline";
   };
-
-  
 
   return (
     <>

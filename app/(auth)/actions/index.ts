@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";
-import { AuthError } from "next-auth";
+import AuthError from "next-auth";
 import { cookies } from "next/headers";
 
 const BACKEND_URL =
@@ -157,7 +157,7 @@ export const signInAction = async (formData: FormData) => {
       });
     } catch (authError: any) {
       if (authError instanceof AuthError) {
-        console.error("NextAuth error:", authError.message);
+        console.error("NextAuth error:", authError);
       }
     }
 

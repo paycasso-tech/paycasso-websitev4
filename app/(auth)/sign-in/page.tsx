@@ -10,7 +10,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import Image from "next/image";
-import router from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Login({
   searchParams,
@@ -20,6 +20,7 @@ export default function Login({
   const [message, setMessage] = useState<Message>({});
   const [isLoading, setIsLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     searchParams.then(setMessage);
@@ -77,7 +78,7 @@ export default function Login({
       setMessage({ success: "Login successful! Redirecting..." });
 
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        router.push("/experience");
       }, 1000);
     } catch (error) {
       console.error("Sign in error:", error);

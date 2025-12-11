@@ -11,10 +11,13 @@ export default function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
   return (
     <div
-      className={cn("fixed top-2 inset-x-0 max-w-2xl mx-auto z-50", className)}
+      className={cn(
+        "fixed top-2 inset-x-0 max-w-3xl mx-auto z-50 flex items-center justify-center",
+        className
+      )}
     >
       <Menu setActive={setActive}>
-        <div className="flex flex-col space-y-4 text-sm">
+        <div className="flex space-y-4 text-sm">
           <LogoSection />
         </div>
         {/* Prevent wrapping and add spacing */}

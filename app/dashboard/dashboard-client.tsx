@@ -267,7 +267,7 @@ const DashboardClient: React.FC = () => {
           <div className="col-span-8 space-y-6">
             {/* Top Row - 4 Cards */}
             <div className="grid grid-cols-4 gap-4">
-              <WalletBalanceCard userData={userData} />
+              {/* <WalletBalanceCard userData={userData} /> */}
 
               {/* Pending Escrow */}
               <div className="relative bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-5 flex flex-col shadow-lg shadow-black/10 overflow-hidden">

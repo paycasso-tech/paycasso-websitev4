@@ -12,6 +12,7 @@ import { useEffect, useState } from "react";
 import { Eye, EyeOff, Mail, Check } from "lucide-react";
 import { AnimatedBentoGrid } from "@/components/shared/bento/animated-bento-grid";
 import { OTPInput } from "@/components/auth/otp-input";
+import AnimatedGrid from "@/components/shared/bento/AnimatedGrid";
 
 const BACKEND_URL =
   process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000";
@@ -149,206 +150,267 @@ export default function Signup({
   };
 
   return (
-    <div className="w-screen h-screen grid lg:grid-cols-2 overflow-hidden">
-      {/* LEFT SIDE - Animated Bento Grid */}
-      <div className="hidden lg:block relative">
-        <AnimatedBentoGrid />
-      </div>
-
-      {/* RIGHT SIDE - Form */}
-      <div className="flex flex-col h-screen bg-background overflow-y-auto">
-        {/* Logo Header */}
-        <div className="flex-shrink-0 p-6 md:p-8">
-          <Link
-            href="/"
-            className="flex items-center gap-2 font-semibold text-lg"
-          >
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                className="h-5 w-5"
-              >
-                <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                <path d="M2 17l10 5 10-5" />
-                <path d="M2 12l10 5 10-5" />
-              </svg>
+    <div className="h-screen w-screen overflow-hidden flex items-center justify-center">
+      <img
+        src="./auth-frames/full_background.png"
+        alt="Paycasso Platform"
+        className="absolute inset-0 h-full w-full object-cover"
+        style={{ filter: "brightness(0.15)" }}
+      />
+      <div className="absolute z-20 grid w-full max-w-7xl lg:grid-cols-2 items-center justify-center gap-10">
+        {/* LEFT SIDE - Image (50% on desktop, hidden on mobile) */}
+        <div className="flex lg:block items-center justify-center bg-transparent">
+          <div className="flex items-center justify-center rounded-4xl">
+            <div className="max-w-lg">
+              <AnimatedGrid />
             </div>
-            Paycasso
-          </Link>
+          </div>
         </div>
 
-        {/* Form Container */}
-        <div className="flex-1 flex items-center justify-center px-6 md:px-8 py-6">
-          <div className="w-full max-w-sm space-y-6">
-            {step === "details" ? (
-              <>
-                {/* Step 1: User Details */}
-                <div className="flex flex-col gap-2 text-center">
-                  <h1 className="text-2xl font-bold">Create an account</h1>
-                  <p className="text-sm text-muted-foreground">
-                    Enter your details to get started
-                  </p>
-                </div>
-
-                <form
-                  className="space-y-4"
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const formData = new FormData(e.currentTarget);
-                    handleSignUp(formData);
-                  }}
+        {/* RIGHT SIDE - Form */}
+        <div className="flex flex-col h-screen bg-transparent overflow-y-auto">
+          {/* Logo Header */}
+          <div className="shrink-0 p-6 md:p-8 md:pb-0">
+            <Link
+              href="/"
+              className="flex items-center gap-2 font-semibold text-lg"
+            >
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  className="h-5 w-5"
                 >
-                  <div className="space-y-2">
-                    <Label htmlFor="full-name">Full Name</Label>
-                    <Input
-                      id="full-name"
-                      name="full-name"
-                      placeholder="John Doe"
-                      required
-                      disabled={isLoading}
-                    />
+                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                  <path d="M2 17l10 5 10-5" />
+                  <path d="M2 12l10 5 10-5" />
+                </svg>
+              </div>
+              Paycasso
+            </Link>
+          </div>
+
+          {/* Form Container */}
+          <div className="flex-1 flex items-center justify-center px-6 md:px-8 py-6">
+            <div className="w-full max-w-sm space-y-6">
+              {step === "details" ? (
+                <>
+                  {/* Step 1: User Details */}
+                  <div className="flex flex-col gap-2 text-center">
+                    <h1 className="text-2xl font-bold">Create an account</h1>
+                    <p className="text-sm text-muted-foreground">
+                      Enter your details to get started
+                    </p>
                   </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="email">Email</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      placeholder="m@example.com"
-                      required
-                      disabled={isLoading}
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="password">Password</Label>
-                    <div className="relative">
+                  <form
+                    className="space-y-4"
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      const formData = new FormData(e.currentTarget);
+                      handleSignUp(formData);
+                    }}
+                  >
+                    <div className="space-y-2">
+                      <Label htmlFor="full-name">Full Name</Label>
                       <Input
-                        id="password"
-                        name="password"
-                        type={showPassword ? "text" : "password"}
-                        placeholder="Min. 6 characters"
-                        minLength={6}
+                        id="full-name"
+                        name="full-name"
+                        placeholder="John Doe"
                         required
                         disabled={isLoading}
-                        className="pr-10"
                       />
-                      <button
-                        type="button"
-                        onClick={() => setShowPassword(!showPassword)}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                      >
-                        {showPassword ? (
-                          <EyeOff className="h-4 w-4" />
-                        ) : (
-                          <Eye className="h-4 w-4" />
-                        )}
-                      </button>
                     </div>
-                  </div>
 
-                  {message && Object.keys(message).length > 0 && (
-                    <div
-                      className={`rounded-lg p-3 text-sm ${
-                        message.error
-                          ? "bg-destructive/15 text-destructive"
-                          : "bg-green-500/15 text-green-600"
-                      }`}
-                    >
-                      <FormMessage message={message} />
-                    </div>
-                  )}
-
-                  <Button type="submit" disabled={isLoading} className="w-full">
-                    {isLoading ? "Creating account..." : "Continue"}
-                  </Button>
-
-                  <div className="text-center text-sm text-muted-foreground">
-                    Already have an account?{" "}
-                    <Link
-                      href="/sign-in"
-                      className="underline underline-offset-4 hover:text-primary"
-                    >
-                      Sign in
-                    </Link>
-                  </div>
-                </form>
-              </>
-            ) : (
-              <>
-                {/* Step 2: OTP Verification */}
-                <div className="flex flex-col gap-2 text-center">
-                  <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                    <Mail className="h-8 w-8 text-primary" />
-                  </div>
-                  <h1 className="text-2xl font-bold">Verify your email</h1>
-                  <p className="text-sm text-muted-foreground">
-                    We sent a 6-digit code to <strong>{email}</strong>
-                  </p>
-                </div>
-
-                <div className="space-y-6">
-                  <div className="space-y-2">
-                    <Label className="text-center block">
-                      Enter verification code
-                    </Label>
-                    <OTPInput
-                      value={otp}
-                      onChange={setOtp}
-                      disabled={isLoading}
-                    />
-                  </div>
-
-                  {message && Object.keys(message).length > 0 && (
-                    <div
-                      className={`rounded-lg p-3 text-sm ${
-                        message.error
-                          ? "bg-destructive/15 text-destructive"
-                          : "bg-green-500/15 text-green-600"
-                      }`}
-                    >
-                      <FormMessage message={message} />
-                    </div>
-                  )}
-
-                  <Button
-                    onClick={handleVerifyOTP}
-                    disabled={isLoading || otp.length !== 6}
-                    className="w-full"
-                  >
-                    {isLoading ? "Verifying..." : "Verify Email"}
-                  </Button>
-
-                  <div className="text-center text-sm">
-                    {resendTimer > 0 ? (
-                      <p className="text-muted-foreground">
-                        Resend code in {resendTimer}s
-                      </p>
-                    ) : (
-                      <button
-                        onClick={handleResendOTP}
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email</Label>
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        placeholder="m@example.com"
+                        required
                         disabled={isLoading}
-                        className="text-primary hover:underline"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="password">Password</Label>
+                      <div className="relative">
+                        <Input
+                          id="password"
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Min. 6 characters"
+                          minLength={6}
+                          required
+                          disabled={isLoading}
+                          className="pr-10"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => setShowPassword(!showPassword)}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                        >
+                          {showPassword ? (
+                            <EyeOff className="h-4 w-4" />
+                          ) : (
+                            <Eye className="h-4 w-4" />
+                          )}
+                        </button>
+                      </div>
+                    </div>
+
+                    {message && Object.keys(message).length > 0 && (
+                      <div
+                        className={`rounded-lg p-3 text-sm ${
+                          message.error
+                            ? "bg-destructive/15 text-destructive"
+                            : "bg-green-500/15 text-green-600"
+                        }`}
                       >
-                        Resend verification code
-                      </button>
+                        <FormMessage message={message} />
+                      </div>
                     )}
+
+                    <Button
+                      type="submit"
+                      disabled={isLoading}
+                      className="w-full"
+                    >
+                      {isLoading ? "Creating account..." : "Continue"}
+                    </Button>
+
+                    <div className="text-center text-sm text-muted-foreground">
+                      Already have an account?{" "}
+                      <Link
+                        href="/sign-in"
+                        className="underline underline-offset-4 hover:text-primary"
+                      >
+                        Sign in
+                      </Link>
+                    </div>
+                  </form>
+                </>
+              ) : (
+                <>
+                  {/* Step 2: OTP Verification */}
+                  <div className="flex flex-col gap-2 text-center">
+                    <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                      <Mail className="h-8 w-8 text-primary" />
+                    </div>
+                    <h1 className="text-2xl font-bold">Verify your email</h1>
+                    <p className="text-sm text-muted-foreground">
+                      We sent a 6-digit code to <strong>{email}</strong>
+                    </p>
                   </div>
 
-                  <button
-                    onClick={() => setStep("details")}
-                    className="w-full text-sm text-muted-foreground hover:text-foreground"
-                  >
-                    ← Back to signup
-                  </button>
-                </div>
-              </>
-            )}
+                  <div className="space-y-6">
+                    <div className="space-y-2">
+                      <Label className="text-center block">
+                        Enter verification code
+                      </Label>
+                      <OTPInput
+                        value={otp}
+                        onChange={setOtp}
+                        disabled={isLoading}
+                      />
+                    </div>
+
+                    {message && Object.keys(message).length > 0 && (
+                      <div
+                        className={`rounded-lg p-3 text-sm ${
+                          message.error
+                            ? "bg-destructive/15 text-destructive"
+                            : "bg-green-500/15 text-green-600"
+                        }`}
+                      >
+                        <FormMessage message={message} />
+                      </div>
+                    )}
+
+                    <Button
+                      onClick={handleVerifyOTP}
+                      disabled={isLoading || otp.length !== 6}
+                      className="w-full"
+                    >
+                      {isLoading ? "Verifying..." : "Verify Email"}
+                    </Button>
+
+                    <div className="text-center text-sm">
+                      {resendTimer > 0 ? (
+                        <p className="text-muted-foreground">
+                          Resend code in {resendTimer}s
+                        </p>
+                      ) : (
+                        <button
+                          onClick={handleResendOTP}
+                          disabled={isLoading}
+                          className="text-primary hover:underline"
+                        >
+                          Resend verification code
+                        </button>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={() => setStep("details")}
+                      className="w-full text-sm text-muted-foreground hover:text-foreground"
+                    >
+                      ← Back to signup
+                    </button>
+                  </div>
+                </>
+              )}
+              {/* Divider */}
+              <div className="relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border">
+                <span className="relative z-10 bg-background px-2 text-muted-foreground">
+                  Or continue with
+                </span>
+              </div>
+
+              {/* Web3 Login Buttons with Real Logos */}
+              <div className="space-y-3">
+                {/* MetaMask Button */}
+                <Button
+                  variant="outline"
+                  type="button"
+                  disabled={isLoading}
+                  className="w-full"
+                  onClick={() => {
+                    alert("MetaMask login coming soon!");
+                  }}
+                >
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"
+                    alt="MetaMask"
+                    className="h-5 w-5 mr-2"
+                  />
+                  Login with MetaMask
+                </Button>
+
+                {/* Coinbase Wallet Button */}
+                <Button
+                  variant="outline"
+                  type="button"
+                  disabled={isLoading}
+                  className="w-full"
+                  onClick={() => {
+                    alert("Coinbase Wallet login coming soon!");
+                  }}
+                >
+                  <img
+                    src="https://avatars.githubusercontent.com/u/18060234?s=200&v=4"
+                    alt="Coinbase"
+                    className="h-5 w-5 mr-2 rounded-sm"
+                  />
+                  Login with Coinbase
+                </Button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -12,7 +12,7 @@
 //     balance: string;
 //     currency: string;
 //   }
-  
+
 //   const [wallet, setWallet] = useState<WalletData | null>(null);
 //   const [loading, setLoading] = useState(true);
 //   const [user, setUser] = useState<unknown>(null);
@@ -25,7 +25,7 @@
 //       try {
 //         setError(null);
 //         const { data: { user: currentUser } } = await supabase.auth.getUser();
-        
+
 //         if (!currentUser) {
 //           router.push("/sign-in");
 //           return;
@@ -36,15 +36,15 @@
 
 //         // Get user's wallet from database (just the basic info needed for Circle API calls)
 //         let walletData = null;
-        
+
 //         try {
 //           // Try to get wallet info from database by joining with profiles
 //           const { data: walletFromDB, error: walletError } = await supabase
 //             .from("wallets")
 //             .select(`
-//               id, 
-//               circle_wallet_id, 
-//               blockchain, 
+//               id,
+//               circle_wallet_id,
+//               blockchain,
 //               wallet_address,
 //               profiles!inner(auth_user_id)
 //             `)
@@ -91,7 +91,7 @@
 //             }
 
 //             const balanceData = await balanceResponse.json();
-            
+
 //             if (balanceData.error) {
 //               throw new Error(balanceData.error);
 //             }
@@ -182,7 +182,6 @@
 //   );
 // }
 
-
 // "use client";
 // import { useEffect, useState } from "react";
 // import { createSupabaseBrowserClient } from "@/lib/supabase/browser-client";
@@ -230,9 +229,9 @@
 //             .from("wallets")
 //             .select(
 //               `
-//               id, 
-//               circle_wallet_id, 
-//               blockchain, 
+//               id,
+//               circle_wallet_id,
+//               blockchain,
 //               wallet_address,
 //               profiles!inner(auth_user_id)
 //             `
@@ -329,7 +328,7 @@
 
 //   if (loading) {
 //     return (
-//       <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+//       <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
 //         <div className="animate-pulse">
 //           <div className="h-4 bg-gray-700 rounded mb-2"></div>
 //           <div className="h-8 bg-gray-700 rounded mb-2"></div>
@@ -341,7 +340,7 @@
 
 //   if (error) {
 //     return (
-//       <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+//       <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
 //         <h3 className="text-white text-medium font-bold mb-2">Wallet Error</h3>
 //         <p className="text-gray-400 text-sm mb-4">{error}</p>
 //         <p className="text-gray-500 text-xs">
@@ -353,7 +352,7 @@
 
 //   if (!wallet) {
 //     return (
-//       <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+//       <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
 //         <h3 className="text-white text-medium font-bold mb-2">
 //           No wallet found
 //         </h3>
@@ -365,12 +364,12 @@
 //   }
 
 //   return (
-//     <div className="relative bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 h-[180px] shadow-lg shadow-black/10 overflow-hidden">
+//     <div className="relative bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 h-[180px] shadow-lg shadow-black/10 overflow-hidden">
 //       {/* Multi-layer glass overlay - SAME AS BUTTON */}
 //       <div className="absolute inset-0 pointer-events-none">
-//         <div className="absolute top-0 left-0 right-0 h-[50%] bg-gradient-to-b from-white/10 to-transparent"></div>
-//         <div className="absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
-//         <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/5 to-transparent"></div>
+//         <div className="absolute top-0 left-0 right-0 h-[50%] bg-linear-to-b from-white/10 to-transparent"></div>
+//         <div className="absolute inset-0 bg-linear-to-br from-black/5 via-transparent to-transparent"></div>
+//         <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-linear-to-t from-black/5 to-transparent"></div>
 //       </div>
 //       {/* Inner glow shadow */}
 //       <div className="absolute inset-0 rounded-4xl shadow-inner shadow-black/5"></div>
@@ -389,7 +388,6 @@
 //     </div>
 //   );
 // }
-
 
 // "use client";
 // import { useEffect, useState } from "react";
@@ -505,7 +503,7 @@
 
 //   if (loading) {
 //     return (
-//       <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+//       <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
 //         <div className="animate-pulse">
 //           <div className="h-4 bg-gray-700 rounded mb-2"></div>
 //           <div className="h-8 bg-gray-700 rounded mb-2"></div>
@@ -517,7 +515,7 @@
 
 //   if (error) {
 //     return (
-//       <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+//       <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
 //         <h3 className="text-white text-medium font-bold mb-2">Wallet Error</h3>
 //         <p className="text-gray-400 text-sm mb-4">{error}</p>
 //         <p className="text-gray-500 text-xs">
@@ -529,7 +527,7 @@
 
 //   if (!wallet) {
 //     return (
-//       <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+//       <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
 //         <h3 className="text-white text-medium font-bold mb-2">
 //           No wallet found
 //         </h3>
@@ -541,12 +539,12 @@
 //   }
 
 //   return (
-//     <div className="relative bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 h-[180px] shadow-lg shadow-black/10 overflow-hidden">
+//     <div className="relative bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 h-[180px] shadow-lg shadow-black/10 overflow-hidden">
 //       {/* Multi-layer glass overlay */}
 //       <div className="absolute inset-0 pointer-events-none">
-//         <div className="absolute top-0 left-0 right-0 h-[50%] bg-gradient-to-b from-white/10 to-transparent"></div>
-//         <div className="absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
-//         <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/5 to-transparent"></div>
+//         <div className="absolute top-0 left-0 right-0 h-[50%] bg-linear-to-b from-white/10 to-transparent"></div>
+//         <div className="absolute inset-0 bg-linear-to-br from-black/5 via-transparent to-transparent"></div>
+//         <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-linear-to-t from-black/5 to-transparent"></div>
 //       </div>
 //       {/* Inner glow shadow */}
 //       <div className="absolute inset-0 rounded-4xl shadow-inner shadow-black/5"></div>
@@ -566,7 +564,6 @@
 //   );
 // }
 
-
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -585,7 +582,11 @@ interface WalletData {
   };
 }
 
-export default function WalletBalanceCard() {
+interface UserDataResponse {
+  wallet: WalletData;
+}
+
+export default function WalletBalanceCard({ userData }: UserDataResponse) {
   const [wallet, setWallet] = useState<WalletData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -649,7 +650,7 @@ export default function WalletBalanceCard() {
 
   if (loading) {
     return (
-      <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+      <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
         <div className="animate-pulse">
           <div className="h-4 bg-gray-700 rounded mb-2"></div>
           <div className="h-8 bg-gray-700 rounded mb-2"></div>
@@ -661,7 +662,7 @@ export default function WalletBalanceCard() {
 
   if (error) {
     return (
-      <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+      <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
         <h3 className="text-white text-medium font-bold mb-2">Wallet Error</h3>
         <p className="text-gray-400 text-sm mb-4">{error}</p>
         <p className="text-gray-500 text-xs">
@@ -673,7 +674,7 @@ export default function WalletBalanceCard() {
 
   if (!wallet) {
     return (
-      <div className="bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
+      <div className="bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 shadow-lg shadow-black/10">
         <h3 className="text-white text-medium font-bold mb-2">
           No wallet found
         </h3>
@@ -685,12 +686,12 @@ export default function WalletBalanceCard() {
   }
 
   return (
-    <div className="relative bg-white/[0.03] backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 h-[180px] shadow-lg shadow-black/10 overflow-hidden">
+    <div className="relative bg-white/3 backdrop-blur-xl backdrop-saturate-150 border border-white/20 rounded-4xl p-6 h-[180px] shadow-lg shadow-black/10 overflow-hidden">
       {/* Multi-layer glass overlay */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 right-0 h-[50%] bg-gradient-to-b from-white/10 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-transparent"></div>
-        <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-gradient-to-t from-black/5 to-transparent"></div>
+        <div className="absolute top-0 left-0 right-0 h-[50%] bg-linear-to-b from-white/10 to-transparent"></div>
+        <div className="absolute inset-0 bg-linear-to-br from-black/5 via-transparent to-transparent"></div>
+        <div className="absolute bottom-0 left-0 right-0 h-[30%] bg-linear-to-t from-black/5 to-transparent"></div>
       </div>
       {/* Inner glow shadow */}
       <div className="absolute inset-0 rounded-4xl shadow-inner shadow-black/5"></div>

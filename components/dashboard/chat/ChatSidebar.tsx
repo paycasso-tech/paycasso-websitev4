@@ -31,18 +31,18 @@ export default function ChatSidebar({
     return `paycasso-escrow-${contractId || "chat"}-${Date.now()}`;
   }, [contractId]);
 
-  // Get current user
-  useEffect(() => {
-    const getCurrentUser = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
-      if (user) {
-        setSenderId(user.id);
-      }
-    };
-    getCurrentUser();
-  }, [supabase]);
+  // TODO
+  //   useEffect(() => {
+  //     const getCurrentUser = async () => {
+  //       const {
+  //         data: { user },
+  //       } = await supabase.auth.getUser();
+  //       if (user) {
+  //         setSenderId(user.id);
+  //       }
+  //     };
+  //     getCurrentUser();
+  //   }, [supabase]);
 
   const formatMessageTime = (dateString: string) => {
     return format(new Date(dateString), "h:mm a");

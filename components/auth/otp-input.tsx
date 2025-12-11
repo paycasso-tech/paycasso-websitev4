@@ -10,7 +10,12 @@ interface OTPInputProps {
   disabled?: boolean;
 }
 
-export function OTPInput({ length = 6, value, onChange, disabled }: OTPInputProps) {
+export function OTPInput({
+  length = 6,
+  value,
+  onChange,
+  disabled,
+}: OTPInputProps) {
   const [focusedIndex, setFocusedIndex] = useState(0);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
@@ -43,9 +48,12 @@ export function OTPInput({ length = 6, value, onChange, disabled }: OTPInputProp
 
   const handlePaste = (e: ClipboardEvent<HTMLInputElement>) => {
     e.preventDefault();
-    const pastedData = e.clipboardData.getData("text").replace(/[^0-9]/g, "").slice(0, length);
+    const pastedData = e.clipboardData
+      .getData("text")
+      .replace(/[^0-9]/g, "")
+      .slice(0, length);
     onChange(pastedData);
-    
+
     const nextIndex = Math.min(pastedData.length, length - 1);
     inputRefs.current[nextIndex]?.focus();
     setFocusedIndex(nextIndex);
@@ -56,7 +64,9 @@ export function OTPInput({ length = 6, value, onChange, disabled }: OTPInputProp
       {Array.from({ length }).map((_, index) => (
         <Input
           key={index}
-          ref={(el) => (inputRefs.current[index] = el)}
+          ref={(el) => {
+            inputRefs.current[index] = el;
+          }}
           type="text"
           inputMode="numeric"
           maxLength={1}

@@ -234,9 +234,7 @@
 "use client";
 
 import Link from "next/link";
-import { hasEnvVars } from "@/lib/utils/supabase/check-env-vars";
 import AuthButton from "@/components/auth/header-auth";
-import { EnvVarWarning } from "@/components/auth/env-var-warning";
 import { useEffect, useState } from "react";
 import { IoNotifications } from "react-icons/io5";
 

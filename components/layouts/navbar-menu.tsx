@@ -28,7 +28,13 @@ export const MenuItem = ({
 }) => {
   const router = useRouter();
   return (
-    <div onMouseEnter={() => setActive(item)} className="relative" onClick={()=>{router.push(route)}}>
+    <div
+      onMouseEnter={() => setActive(item)}
+      className="relative"
+      onClick={() => {
+        router.push(route);
+      }}
+    >
       <motion.p
         transition={{ duration: 0.3 }}
         className="cursor-pointer text-white hover:text-gray-200 transition-colors duration-300"
@@ -86,7 +92,7 @@ export const Menu = ({
   // Calculate width based on scroll position
   const getNavbarWidth = () => {
     const maxScroll = 500; // Maximum scroll distance to consider
-    const minWidth = 600; // Initial width in pixels
+    const minWidth = 650; // Initial width in pixels
     const maxWidth = 480; // Final expanded width in pixels
 
     const scrollProgress = Math.min(scrollY / maxScroll, 1);
@@ -98,7 +104,7 @@ export const Menu = ({
   // Calculate gap based on scroll position
   const getNavbarGap = () => {
     const maxScroll = 500; // Maximum scroll distance to consider
-    const initialGap = 12; // Initial gap (space-x-12 equivalent)
+    const initialGap = 8; // Initial gap (space-x-12 equivalent)
     const finalGap = 6; // Final gap (space-x-6 equivalent)
 
     const scrollProgress = Math.min(scrollY / maxScroll, 1);

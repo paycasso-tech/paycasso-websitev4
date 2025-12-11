@@ -104,7 +104,7 @@ export const Menu = ({
   // Calculate gap based on scroll position
   const getNavbarGap = () => {
     const maxScroll = 500; // Maximum scroll distance to consider
-    const initialGap = 8; // Initial gap (space-x-12 equivalent)
+    const initialGap = 6; // Initial gap (space-x-12 equivalent)
     const finalGap = 6; // Final gap (space-x-6 equivalent)
 
     const scrollProgress = Math.min(scrollY / maxScroll, 1);

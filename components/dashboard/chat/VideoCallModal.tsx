@@ -79,6 +79,7 @@ export default function VideoCallModal({
             }}
             userInfo={{
               displayName: displayName,
+              email: "null",
             }}
             onApiReady={(externalApi) => {
               console.log("Jitsi Meet API Ready");

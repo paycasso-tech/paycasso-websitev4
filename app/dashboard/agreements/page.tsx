@@ -730,7 +730,7 @@ import {
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import InteractiveSidebar from "@/components/dashboard/sidebar/sidebar";
-import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
+// import ChatSidebar from "@/components/dashboard/chat/ChatSidebar";
 
 const PaycassoAgreements = () => {
   const router = useRouter();
@@ -1018,12 +1018,12 @@ const PaycassoAgreements = () => {
           <div className="xl:col-span-1">
             {showChat && selectedContract ? (
               <div className="h-[700px]">
-                <ChatSidebar
+                {/* <ChatSidebar
                   contractId={selectedContract.id}
                   counterpartyId={selectedContract.counterpartyId}
                   counterpartyName={selectedContract.counterparty}
                   onClose={() => setShowChat(false)}
-                />
+                /> */}
               </div>
             ) : (
               <div className="relative bg-gradient-to-br from-white/[0.07] via-white/[0.03] to-white/[0.02] backdrop-blur-2xl backdrop-saturate-150 border border-white/20 rounded-[36px] p-8 shadow-2xl overflow-hidden flex flex-col items-center justify-center h-[700px]">

@@ -1,14 +1,17 @@
 "use client";
 
 import type { EscrowAgreementWithDetails } from "@/types/escrow";
-import { type SmartContractResponse, useSmartContract } from "@/hooks/useSmartContract";
+import {
+  type SmartContractResponse,
+  useSmartContract,
+} from "@/hooks/useSmartContract";
 import { Button } from "@/components/ui/button";
 import { SYSTEM_AGENT_ADDRESS, SYSTEM_AGENT_WALLET_ID } from "@/lib/constants";
 import { Loader2, WalletCards } from "lucide-react";
 import { toast } from "sonner";
 
 interface CreateSmartContractButtonProps {
-  agreement: EscrowAgreementWithDetails
+  agreement: EscrowAgreementWithDetails;
   disabled?: boolean;
 }
 
@@ -27,14 +30,14 @@ export const CreateSmartContractButton = ({
       return;
     }
 
-    const amountUSDC = agreement.terms.amounts && agreement.terms.amounts.length > 0
-      ? parseFloat(agreement.terms.amounts[0]?.amount.replace(/[$,]/g, ""))
-      : undefined;
+    const amountUSDC =
+      agreement.terms.amounts && agreement.terms.amounts.length > 0
+        ? parseFloat(agreement.terms.amounts[0]?.amount.replace(/[$,]/g, ""))
+        : undefined;
 
     if (!amountUSDC) {
       toast.error("Invalid amount for the contract", {
-        description:
-          "Amount for the contract should be greater than 0",
+        description: "Amount for the contract should be greater than 0",
       });
       return;
     }

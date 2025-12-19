@@ -9,7 +9,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Button } from "@/components/ui/button";
-import { sleep } from "@/lib/utils/sleep";
+import { sleep } from "@/lib/utils";
 
 interface Props {
   text: string;

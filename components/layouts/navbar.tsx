@@ -38,7 +38,7 @@ export default function Navbar({ className }: { className?: string }) {
             setActive={setActive}
             active={active}
             item="Our Flow"
-            route="/experience"
+            route="/our-flow"
           />
           <Link href="/dashboard">
             <Button className="py-3 px-4 bg-white text-black font-semibold text-md rounded-4xl hover:bg-gray-300">

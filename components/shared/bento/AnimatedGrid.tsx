@@ -121,7 +121,7 @@ export default function AnimatedGrid() {
   useEffect(() => {
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % frames.length);
-    }, 15200);
+    }, 7200);
 
     return () => clearInterval(id);
   }, []);

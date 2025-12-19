@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import InteractiveSidebar from "@/components/dashboard/sidebar/sidebar";

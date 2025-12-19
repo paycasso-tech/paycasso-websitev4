@@ -1,5 +1,5 @@
 import HeroSection from "@/components/home/hero/hero-section";
-import AboutSection from "@/components/home/about/about-section";
+import AboutSection from "@/components/home/about/BalanceSection";
 import VisionSection from "@/components/home/features/vision-section";
 import Footer from "@/components/layouts/footer";
 import CallToAction from "@/components/home/features/call-to-action";

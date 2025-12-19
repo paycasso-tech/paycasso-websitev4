@@ -9,10 +9,10 @@ export default function LogoSection() {
       <Image
         src="/logo.png"
         alt="Paycasso Logo"
-        width={80}
-        height={40}
+        width={160}
+        height={32}
         priority
-        className="h-6 w-full object-cover"
+        className="h-8 w-40 object-contain"
       />
     </div>
   );

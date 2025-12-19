@@ -165,7 +165,7 @@ export const ProductItem = ({
         <h4 className="text-xl font-bold mb-1 text-white group-hover:text-gray-200 transition-colors duration-300">
           {title}
         </h4>
-        <p className="text-gray-300 text-sm max-w-[10rem] group-hover:text-gray-100 transition-colors duration-300">
+        <p className="text-gray-300 text-sm max-w-40 group-hover:text-gray-100 transition-colors duration-300">
           {description}
         </p>
       </div>

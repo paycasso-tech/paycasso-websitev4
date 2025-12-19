@@ -12,8 +12,7 @@ export default function Navbar({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "fixed top-2 inset-x-0 max-w-3xl mx-auto z-50 flex items-center justify-center",
-        className
+        "fixed top-2 inset-x-0 max-w-3xl mx-auto z-50 flex items-center justify-center"
       )}
     >
       <Menu setActive={setActive}>

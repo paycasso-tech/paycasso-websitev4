@@ -80,9 +80,10 @@ export default function BalanceSection() {
               <Image
                 src="/logo.png"
                 alt="Paycasso Logo"
-                fill
-                style={{ objectFit: "contain" }}
+                width={160}
+                height={32}
                 priority
+                className="h-8 w-40 object-contain"
               />
             </span>
           </h2>

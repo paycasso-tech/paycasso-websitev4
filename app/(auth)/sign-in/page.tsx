@@ -107,30 +107,21 @@ export default function Login({
         </div>
 
         {/* RIGHT SIDE - Form (50% on desktop, 100% on mobile) */}
-        <div className="flex flex-col min-h-screen bg-transparent">
+        <div className="flex flex-col min-h-screen bg-transparent pl-5">
           {/* Logo Header */}
           <div className="shrink-0 p-6 md:p-8 md:pb-0">
             <Link
               href="/"
               className="flex items-center gap-2 font-semibold text-lg"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="h-5 w-5"
-                >
-                  <path d="M12 2L2 7l10 5 10-5-10-5z" />
-                  <path d="M2 17l10 5 10-5" />
-                  <path d="M2 12l10 5 10-5" />
-                </svg>
-              </div>
-              Paycasso
+              <Image
+                src="/logo.png"
+                alt="Paycasso Logo"
+                width={160}
+                height={32}
+                priority
+                className="h-8 w-40 object-contain"
+              />
             </Link>
           </div>
 

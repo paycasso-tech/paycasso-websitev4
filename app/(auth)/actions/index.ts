@@ -1,5 +1,5 @@
 "use server";
-export const runtime = 'edge';
+export const runtime = "edge";
 
 import { redirect } from "next/navigation";
 import { signIn, signOut } from "@/auth";

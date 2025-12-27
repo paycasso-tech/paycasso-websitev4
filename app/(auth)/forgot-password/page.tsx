@@ -1,4 +1,5 @@
 "use client";
+export const runtime = "edge";
 
 import { forgotPasswordAction } from "@/app/(auth)/actions";
 import { FormMessage, Message } from "@/components/auth/form-message";

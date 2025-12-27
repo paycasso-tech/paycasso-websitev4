@@ -1,5 +1,5 @@
 "use client";
-
+export const runtime = "edge";
 import { verifyEmailAction, resendOTPAction } from "@/app/(auth)/actions";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect, Suspense } from "react";

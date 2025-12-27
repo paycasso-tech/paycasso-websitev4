@@ -1,5 +1,5 @@
 "use client";
-
+export const runtime = "edge";
 import { signInAction } from "@/app/(auth)/actions";
 import { FormMessage, Message } from "@/components/auth/form-message";
 import { SubmitButton } from "@/components/auth/submit-button";

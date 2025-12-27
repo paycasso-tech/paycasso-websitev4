@@ -1,15 +1,23 @@
-export const dynamic = "force-dynamic";
+export const runtime = "edge";
 
-import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import InteractiveSidebar from "@/components/dashboard/sidebar/sidebar";
 
-export default async function SupportPage() {
-  const session = await auth();
+async function checkAuth() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const email = cookieStore.get("user_email")?.value;
 
-  if (!session?.user) {
+  if (!token || !email) {
     redirect("/sign-in");
   }
+
+  return { token, email };
+}
+
+export default async function SupportPage() {
+  await checkAuth();
 
   return (
     <div className="min-h-screen bg-black">

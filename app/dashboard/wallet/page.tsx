@@ -1719,79 +1719,170 @@
 //   );
 // }
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-import { auth } from "@/auth";
+// import { auth } from "@/auth";
+// import { redirect } from "next/navigation";
+// import InteractiveSidebar from "@/components/dashboard/sidebar/sidebar";
+// // import WalletContent from "@/components/dashboard/wallet/wallet-content";
+
+// const BACKEND_API_URL = process.env.BACKEND_API_URL || "http://localhost:3001";
+
+// export default async function WalletPage() {
+//   const session = await auth();
+
+//   if (!session?.user) {
+//     redirect("/sign-in");
+//   }
+
+//   // Fetch wallet data from backend
+//   let walletData = null;
+//   let error = null;
+
+//   //   try {
+//   //     const response = await fetch(`${BACKEND_API_URL}/api/user/getWallet`, {
+//   //       method: "GET",
+//   //       headers: {
+//   //         "Content-Type": "application/json",
+//   //         Authorization: `Bearer ${session.user.id}`,
+//   //         "x-user-email": session.user.email,
+//   //       },
+//   //       cache: "no-store", // Don't cache wallet data
+//   //     });
+
+//   //     if (!response.ok) {
+//   //       throw new Error(`Failed to fetch wallet: ${response.status}`);
+//   //     }
+
+//   //     walletData = await response.json();
+//   //   } catch (err) {
+//   //     console.error("Error fetching wallet:", err);
+//   //     error = "Failed to load wallet data";
+//   //   }
+
+//   return (
+//     <div></div>
+//     // <div className="min-h-screen w-full bg-[#0a0a0a] text-white">
+//     //   <InteractiveSidebar />
+
+//     //   <div className="ml-[88px] p-8">
+//     //     {/* <div className="mb-6">
+//     //       <h1 className="text-3xl font-bold tracking-tight">Wallet Overview</h1>
+//     //       <p className="text-gray-400 mt-2">
+//     //         Manage your crypto wallet and transactions
+//     //       </p>
+//     //     </div> */}
+
+//     //     {error ? (
+//     //       <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-xl p-6">
+//     //         <h2 className="text-xl font-semibold text-yellow-500 mb-2">
+//     //           Wallet Error
+//     //         </h2>
+//     //         <p className="text-gray-400">{error}</p>
+//     //       </div>
+//     //     ) : walletData ? (
+//     //       <WalletContent
+//     //         initialWalletData={walletData}
+//     //         userEmail={session.user.email || ""}
+//     //         userName={session.user.name || ""}
+//     //       />
+//     //     ) : (
+//     //       <div className="bg-white/[0.03] border border-white/20 rounded-xl p-6">
+//     //         <p className="text-gray-400">Loading wallet...</p>
+//     //       </div>
+//     //     )}
+//     //   </div>
+//     // </div>
+//   );
+// }
+
+export const runtime = "edge";
+
 import { redirect } from "next/navigation";
+import { cookies } from "next/headers";
 import InteractiveSidebar from "@/components/dashboard/sidebar/sidebar";
 // import WalletContent from "@/components/dashboard/wallet/wallet-content";
 
-const BACKEND_API_URL = process.env.BACKEND_API_URL || "http://localhost:3001";
+const BACKEND_API_URL =
+  process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:3001";
 
-export default async function WalletPage() {
-  const session = await auth();
+async function getAuthData() {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const email = cookieStore.get("user_email")?.value;
 
-  if (!session?.user) {
+  if (!token || !email) {
     redirect("/sign-in");
   }
+
+  return { token, email };
+}
+
+export default async function WalletPage() {
+  const { token, email } = await getAuthData();
 
   // Fetch wallet data from backend
   let walletData = null;
   let error = null;
 
-  //   try {
-  //     const response = await fetch(`${BACKEND_API_URL}/api/user/getWallet`, {
-  //       method: "GET",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${session.user.id}`,
-  //         "x-user-email": session.user.email,
-  //       },
-  //       cache: "no-store", // Don't cache wallet data
-  //     });
+  try {
+    const response = await fetch(`${BACKEND_API_URL}/api/user/getWallet`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        "x-user-email": email,
+      },
+      cache: "no-store", // Don't cache wallet data
+    });
 
-  //     if (!response.ok) {
-  //       throw new Error(`Failed to fetch wallet: ${response.status}`);
-  //     }
+    if (!response.ok) {
+      throw new Error(`Failed to fetch wallet: ${response.status}`);
+    }
 
-  //     walletData = await response.json();
-  //   } catch (err) {
-  //     console.error("Error fetching wallet:", err);
-  //     error = "Failed to load wallet data";
-  //   }
+    walletData = await response.json();
+  } catch (err) {
+    console.error("Error fetching wallet:", err);
+    error = "Failed to load wallet data";
+  }
 
   return (
-    <div></div>
-    // <div className="min-h-screen w-full bg-[#0a0a0a] text-white">
-    //   <InteractiveSidebar />
+    <div className="min-h-screen w-full bg-[#0a0a0a] text-white">
+      <InteractiveSidebar />
 
-    //   <div className="ml-[88px] p-8">
-    //     {/* <div className="mb-6">
-    //       <h1 className="text-3xl font-bold tracking-tight">Wallet Overview</h1>
-    //       <p className="text-gray-400 mt-2">
-    //         Manage your crypto wallet and transactions
-    //       </p>
-    //     </div> */}
+      <div className="ml-[88px] p-8">
+        <div className="mb-6">
+          <h1 className="text-3xl font-bold tracking-tight">Wallet Overview</h1>
+          <p className="text-gray-400 mt-2">
+            Manage your crypto wallet and transactions
+          </p>
+        </div>
 
-    //     {error ? (
-    //       <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-xl p-6">
-    //         <h2 className="text-xl font-semibold text-yellow-500 mb-2">
-    //           Wallet Error
-    //         </h2>
-    //         <p className="text-gray-400">{error}</p>
-    //       </div>
-    //     ) : walletData ? (
-    //       <WalletContent
-    //         initialWalletData={walletData}
-    //         userEmail={session.user.email || ""}
-    //         userName={session.user.name || ""}
-    //       />
-    //     ) : (
-    //       <div className="bg-white/[0.03] border border-white/20 rounded-xl p-6">
-    //         <p className="text-gray-400">Loading wallet...</p>
-    //       </div>
-    //     )}
-    //   </div>
-    // </div>
+        {error ? (
+          <div className="bg-yellow-900/20 border border-yellow-700/50 rounded-xl p-6">
+            <h2 className="text-xl font-semibold text-yellow-500 mb-2">
+              Wallet Error
+            </h2>
+            <p className="text-gray-400">{error}</p>
+          </div>
+        ) : walletData ? (
+          <div className="bg-white/[0.03] border border-white/20 rounded-xl p-6">
+            <pre className="text-sm text-gray-400">
+              {JSON.stringify(walletData, null, 2)}
+            </pre>
+            {/* Uncomment when WalletContent is edge-compatible */}
+            {/* <WalletContent
+              initialWalletData={walletData}
+              userEmail={email}
+              userName={walletData.user?.name || email.split("@")[0]}
+            /> */}
+          </div>
+        ) : (
+          <div className="bg-white/[0.03] border border-white/20 rounded-xl p-6">
+            <p className="text-gray-400">Loading wallet...</p>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }

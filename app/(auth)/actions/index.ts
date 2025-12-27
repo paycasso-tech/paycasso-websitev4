@@ -2,8 +2,6 @@
 export const runtime = "edge";
 
 import { redirect } from "next/navigation";
-import { signIn, signOut } from "@/auth";
-import AuthError from "next-auth";
 import { cookies } from "next/headers";
 
 const BACKEND_URL =
@@ -148,26 +146,12 @@ export const signInAction = async (formData: FormData) => {
       console.error("Wallet loading error:", walletError.message);
     }
 
-    // If using NextAuth, sign in with credentials
-    try {
-      await signIn("credentials", {
-        email,
-        password,
-        token: loginData.token,
-        redirect: false,
-      });
-    } catch (authError: any) {
-      if (authError instanceof AuthError) {
-        console.error("NextAuth error:", authError);
-      }
-    }
-
     // Return success and let the client handle redirect
     return { success: true };
   } catch (error: any) {
     console.error("❌ Sign-in error:", error);
 
-    // Re-throw redirect errors (NextAuth uses these for navigation)
+    // Re-throw redirect errors
     if (error.message?.includes("NEXT_REDIRECT")) {
       throw error;
     }
@@ -330,16 +314,12 @@ export const signOutAction = async () => {
     const cookieStore = await cookies();
     cookieStore.delete("auth_token");
     cookieStore.delete("user_email");
-
-    // NextAuth signOut
-    await signOut({
-      redirect: true,
-      redirectTo: "/sign-in",
-    });
   } catch (error: any) {
     console.error("Sign out error:", error.message);
-    redirect("/sign-in");
   }
+
+  // Redirect to sign-in page
+  redirect("/sign-in");
 };
 
 // Helper action to get current user from backend

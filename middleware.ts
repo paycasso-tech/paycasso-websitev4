@@ -1,9 +1,11 @@
 export const runtime = "edge";
+
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export const proxy = (request: NextRequest) => {
-  const authToken = request.cookies.get("authjs.session-token");
+export function middleware(request: NextRequest) {
+  const token = request.cookies.get("auth_token")?.value;
+  const email = request.cookies.get("user_email")?.value;
   const { pathname } = request.nextUrl;
 
   const protectedRoutes = [
@@ -19,18 +21,19 @@ export const proxy = (request: NextRequest) => {
     pathname.startsWith(route)
   );
 
-  if (isProtectedRoute && !authToken) {
+  // Protect routes - check for your cookie-based auth
+  if (isProtectedRoute && (!token || !email)) {
     return NextResponse.redirect(new URL("/sign-in", request.url));
   }
 
-  if ((pathname === "/sign-in" || pathname === "/sign-up") && authToken) {
+  // Redirect authenticated users away from auth pages
+  if ((pathname === "/sign-in" || pathname === "/sign-up") && token && email) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
-};
+}
 
-// matcher is now moved under "proxy" config
 export const config = {
   matcher: [
     "/dashboard/:path*",

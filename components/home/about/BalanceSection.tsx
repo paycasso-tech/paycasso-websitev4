@@ -14,6 +14,7 @@ const paragraphs = [
   "Our vision is to revolutionize global work payments with secure, low-cost, and transparent smart contract-based escrow and instant USDC settlements.",
   "Pay and get paid in stablecoins USDC which are pegged 1:1 with US dollars.",
   "Fairness guaranteed for both sides. Funds locked in smart contract escrow until contract conditions are met.",
+  "In case of disputes, our multi-layered dispute resolution system ensures impartial decisions based on contract terms and evidence.",
   "Convert Bitcoin, Ethereum, and other tokens to USDC and pay freelancers and gig workers instantly.",
 ];
 

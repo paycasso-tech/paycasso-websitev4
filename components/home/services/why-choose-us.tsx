@@ -66,9 +66,9 @@ export default function WhyChooseUs() {
         </div>
       ),
       features: [
-        "✓ 100% user friendly",
-        "✓ Will become your companion",
-        "✓ Easy to use",
+        "✓ Powered by L1 base infrastucture",
+        "✓ Bridge your assets seamlessly",
+        "✓ Easy to use interface",
       ],
       illustration: "/website/lock-vector.svg",
     },
@@ -76,13 +76,13 @@ export default function WhyChooseUs() {
       id: 1,
       colSpan: "col-span-3 lg:col-span-1",
       icon: "/website/secure-icon.svg",
-      title: "Secure and Trust-free",
+      title: "Decentralised Trust",//"Secure and Trust-free",
       description: (
         <p className="w-full text-sm text-neutral-400">
           <span className="text-neutral-200 font-semibold">
-            Funds are secured in decentralized escrow
+            Replace middlemen with decentralized smart contracts.
           </span>{" "}
-          until tasks are verified.
+          Your funds stay secured on-chain.
         </p>
       ),
       hasMarquee: true,
@@ -91,12 +91,12 @@ export default function WhyChooseUs() {
       id: 2,
       colSpan: "col-span-3 lg:col-span-1",
       icon: "/website/dispute.svg",
-      title: "Dispute Resolution with DAOs",
+      title: "Dispute Resolution",
       description: (
         <p className="w-full text-sm text-neutral-400">
-          Disputes are handled transparently{" "}
+          Multi-layered Dispute Resolution{" "}
           <span className="text-neutral-200 font-semibold">
-            not controlled by Paycasso servers.
+            Powered by DAO Agents and LLM Council.
           </span>
         </p>
       ),
@@ -106,19 +106,19 @@ export default function WhyChooseUs() {
       id: 3,
       colSpan: "col-span-3 lg:col-span-1",
       icon: "/website/choose-arrow.svg",
-      title: "Your Pocket Friendly Crypto",
+      title: "Instant Settlements. Minimal Fees",//"Your Pocket Friendly Crypto",
       bgImage: true,
     },
     {
       id: 4,
       colSpan: "col-span-3 lg:col-span-1",
       icon: "/website/ml.svg",
-      title: "AI Integration",
+      title: "Immutable Resolution",
       description: (
         <p className="w-full text-sm text-neutral-400">
-          Integrate your favourite ML-models to{" "}
+          Get your money back if you aren't at fault{" "}
           <span className="text-neutral-200 font-semibold">
-            store, index and search vector embeddings
+            Never lose money to ghosting or scams again;
           </span>
         </p>
       ),

@@ -1,30 +1,21 @@
-import BackgroundVideo from "@/components/our-flow/BackgroundVideo";
-import CryptoBackground from "@/components/our-flow/CryptoBackground";
-import HeroText from "@/components/our-flow/HeroText";
-import LightOverlay from "@/components/our-flow/LightOverlay";
+import BackgroundVideo from "@/components/our-flow/Landing/BackgroundVideo";
+import CryptoBackground from "@/components/our-flow/Landing/CryptoBackground";
+import HeroText from "@/components/our-flow/Landing/HeroText";
+import LightOverlay from "@/components/our-flow/Landing/LightOverlay";
 import Navbar from "@/components/layouts/navbar";
+import LandingPage from "@/components/our-flow/Landing/LandingPage";
+import CardPage from "@/components/our-flow/Card/CardPage";
+import StarPage from "@/components/our-flow/Star/StarPage";
+import FeedbackPage from "@/components/our-flow/FeedBack/FeedBackPage";
 
 export default function Home() {
   return (
     <>
       <Navbar />
-      <main className="relative min-h-screen w-full overflow-hidden bg-black">
-        {/* 1. Video */}
-        <BackgroundVideo />
-
-        {/* 2. Crypto grid */}
-        <CryptoBackground />
-
-        {/* 3. Light image */}
-        <LightOverlay />
-
-        <div
-          className="absolute inset-0 z-1
-        bg-linear-to-b from-black/10 via-black/20 to-black/30"
-        />
-        {/* 4. Text */}
-        <HeroText />
-      </main>
+      <LandingPage />
+      <CardPage />
+      <StarPage />
+      <FeedbackPage />
     </>
   );
 }

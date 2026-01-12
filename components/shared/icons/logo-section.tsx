@@ -11,6 +11,7 @@ export default function LogoSection() {
         alt="Paycasso Logo"
         width={160}
         height={32}
+        style={{ width: "auto", height: "auto" }}
         priority
         className="h-8 w-40 object-contain"
       />

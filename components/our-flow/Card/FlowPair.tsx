@@ -130,7 +130,7 @@ export default function FlowPair({ data }: { data: any }) {
               key={i}
               d={`${p.d} h 0.01`} // force horizontal tangent
               stroke="rgba(255,255,255,0.7)"
-              strokeWidth="2"
+              strokeWidth="0.8"
               fill="none"
               markerStart={
                 p.startMarker ? `url(#dot-${data.id}-${i})` : undefined

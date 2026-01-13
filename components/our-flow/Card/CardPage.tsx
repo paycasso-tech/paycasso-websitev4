@@ -89,10 +89,13 @@ export default function CardPage() {
           style={{ opacity: headingOpacity, y: headingY }}
           className="absolute top-24 left-24 z-20 max-w-[640px] text-white"
         >
-          <h2 className="text-5xl font-semibold leading-tight">
-            nothing <span className="text-blue-400">hidden</span>.
+          <h2 className="text-5xl font-normal leading-tight">
+            nothing{" "}
+            <span className="text-[#0DBBFF] font-extralight">hidden</span>
+            <span className="font-extralight">.</span>
             <br />
-            everything <span className="text-blue-400">flows</span>
+            everything{" "}
+            <span className="text-[#0DBBFF] font-extralight">flows</span>
           </h2>
         </motion.div>
 

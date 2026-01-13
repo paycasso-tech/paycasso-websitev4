@@ -8,7 +8,11 @@ import StarsBackground from "../shared/StarsBackground";
 
 const StarPath = dynamic(() => import("./StarPath"), { ssr: false });
 
-const STAR_ENTRY_OFFSET = 0.08;
+/**
+ * ⭐ Path percentage where Block One visually sits
+ * This must match Figma
+ */
+const STAR_ENTRY_POINT = 0.07;
 
 export default function StarPage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -25,31 +29,38 @@ export default function StarPage() {
     mass: 0.8,
   });
 
-  // Raw star progress (scroll-driven)
-  const rawStarProgress = useTransform(smoothScroll, (v) =>
-    Math.min(STAR_ENTRY_OFFSET + v * (1 - STAR_ENTRY_OFFSET), 1)
-  );
-
-  // 🔒 LOCKED progress (never decreases)
-  const [lockedProgress, setLockedProgress] = useState(0);
+  /**
+   * 🔒 Locked visual progress
+   * Starts ALREADY at Block One
+   */
+  const [lockedProgress, setLockedProgress] =
+    useState<number>(STAR_ENTRY_POINT);
 
   useEffect(() => {
-    const unsubscribe = rawStarProgress.on("change", (v) => {
-      setLockedProgress((prev) => Math.max(prev, v));
-    });
-    return unsubscribe;
-  }, [rawStarProgress]);
+    const unsubscribe = smoothScroll.on("change", (v) => {
+      setLockedProgress((prev) => {
+        // Hold star at Block One on entry
+        if (v < 0.01) return STAR_ENTRY_POINT;
 
-  // ✅ This is the ONLY progress used everywhere
+        // Map remaining scroll to remaining path
+        const mapped = STAR_ENTRY_POINT + v * (1 - STAR_ENTRY_POINT);
+
+        return Math.max(prev, Math.min(mapped, 1));
+      });
+    });
+
+    return unsubscribe;
+  }, [smoothScroll]);
+
+  // MotionValue used everywhere
   const starProgress = useTransform(() => lockedProgress);
 
-  // Completion flag
   const isComplete = lockedProgress >= 0.99;
 
   return (
     <>
-      {/* Section Heading */}
-      <div className="relative left-24 max-w-[720px] text-white z-10">
+      {/* SECTION HEADING */}
+      <div className="relative left-24 max-w-[720px] text-white z-20">
         <h2 className="text-5xl font-normal leading-tight">
           The motive is to have{" "}
           <span className="text-cyan-400 font-extralight">transparent</span>{" "}
@@ -69,7 +80,7 @@ export default function StarPage() {
           }}
         />
 
-        {/* ⭐ STARS BACKGROUND */}
+        {/* ⭐ STAR FIELD */}
         <StarsBackground />
 
         {/* DARK OVERLAY */}

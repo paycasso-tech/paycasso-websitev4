@@ -3,7 +3,7 @@
 export const flowPairsData = [
   {
     id: "top",
-    containerTop: 0,
+    containerTop: 5,
     containerLeft: -110,
 
     textColumn: {
@@ -12,8 +12,8 @@ export const flowPairsData = [
     },
 
     hub: {
-      left: 180,
-      top: 95,
+      left: 170,
+      top: 90,
     },
 
     svg: {
@@ -68,7 +68,7 @@ export const flowPairsData = [
 
   {
     id: "middle",
-    containerTop: 170,
+    containerTop: 200,
     containerLeft: -280,
 
     textColumn: {
@@ -77,8 +77,8 @@ export const flowPairsData = [
     },
 
     hub: {
-      left: 150,
-      top: 140,
+      left: 140,
+      top: 135,
     },
 
     svg: {
@@ -119,12 +119,12 @@ export const flowPairsData = [
 
     texts: [
       {
-        top: 54,
+        top: 40,
         title: "Lorem ipsum dolor sit",
         description: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
       },
       {
-        top: 164,
+        top: 235,
         title: "Lorem ipsum dolor sit",
         description: "Lorem ipsum dolor sit amet consectetur adipiscing elit",
       },
@@ -133,7 +133,7 @@ export const flowPairsData = [
 
   {
     id: "bottom",
-    containerTop: 360,
+    containerTop: 420,
     containerLeft: -110,
 
     textColumn: {
@@ -142,8 +142,8 @@ export const flowPairsData = [
     },
 
     hub: {
-      left: 180,
-      top: 155,
+      left: 170,
+      top: 150,
     },
 
     svg: {
@@ -189,7 +189,7 @@ export const flowPairsData = [
         description: "Lorem ipsum dolor sit amet consectetur",
       },
       {
-        top: 200,
+        top: 205,
         title: "Lorem ipsum dolor sit",
         description: "Lorem ipsum dolor sit amet consectetur",
       },

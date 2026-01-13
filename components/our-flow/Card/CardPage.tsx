@@ -11,6 +11,7 @@ import {
 } from "framer-motion";
 import CardBundle from "./CardBundle";
 import FlowChart from "./FlowChart";
+import StarsBackground from "../shared/StarsBackground";
 
 export default function CardPage() {
   const ref = useRef<HTMLDivElement>(null);
@@ -70,16 +71,19 @@ export default function CardPage() {
     <section ref={ref} className="relative h-[130vh] overflow-hidden bg-black">
       {/* 🔹 BACKGROUND IMAGE (NEW) */}
       <div
-        className="absolute inset-0 bg-cover bg-center pointer-events-none"
+        className="absolute inset-0 z-0 bg-cover bg-center"
         style={{
           backgroundImage: "url('/our-flow/cards/cardSectionbackground.png')",
         }}
       />
 
-      {/* Dark overlay */}
-      <div className="absolute inset-0 bg-black/40" />
+      {/* ⭐ STARS LAYER */}
+      <StarsBackground />
 
-      <div className="sticky top-0 h-screen overflow-hidden">
+      {/* Dark overlay */}
+      <div className="absolute inset-0 z-10 bg-linear-to-b from-black/30 via-black/20 to-black/40" />
+
+      <div className="sticky top-0 h-screen z-20">
         {/* Heading */}
         <motion.div
           style={{ opacity: headingOpacity, y: headingY }}

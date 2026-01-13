@@ -26,14 +26,12 @@ export default function StarBlock({
 }: Props) {
   const [hovered, setHovered] = useState(false);
 
-  // Heading visibility
   const opacity = useTransform(starProgress, (v) => {
     if (alwaysVisible) return 1;
     if (isComplete) return 1;
     return v >= triggerAt ? 1 : 0;
   });
 
-  // Entrance motion (only once)
   const y = useTransform(
     starProgress,
     [triggerAt - 0.05, triggerAt],
@@ -41,7 +39,6 @@ export default function StarBlock({
     { clamp: true }
   );
 
-  // Text logic
   const textOpacity = isComplete ? (hovered ? 1 : 0) : 1;
 
   return (
@@ -51,18 +48,30 @@ export default function StarBlock({
         y,
         pointerEvents: opacity.get() === 1 ? "auto" : "none",
       }}
-      className={`absolute ${left} w-[320px] text-white`}
+      className={`absolute ${left} flex items-start gap-4`}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <h3 className="text-xl font-semibold mb-2 cursor-pointer">{title}</h3>
+      {/* VERTICAL CONNECTOR */}
+      <div className="relative flex flex-col items-center">
+        {/* line */}
+        <div className="w-px h-14 bg-white/40" />
 
-      <motion.p
-        style={{ opacity: textOpacity }}
-        className="text-sm transition-opacity duration-300"
-      >
-        {text}
-      </motion.p>
+        {/* dot */}
+        <div className="w-2 h-2 rounded-full bg-white shadow-[0_0_8px_rgba(255,255,255,0.6)]" />
+      </div>
+
+      {/* CONTENT */}
+      <div className="w-[320px] text-white">
+        <h3 className="text-xl font-semibold mb-2 cursor-pointer">{title}</h3>
+
+        <motion.p
+          style={{ opacity: textOpacity }}
+          className="text-sm transition-opacity duration-300"
+        >
+          {text}
+        </motion.p>
+      </div>
     </motion.div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function FlowPair({ data }: { data: any }) {
   /**
@@ -35,9 +36,14 @@ export default function FlowPair({ data }: { data: any }) {
         className="absolute z-20"
         style={{ left: data.hub.left, top: data.hub.top }}
       >
-        <div className="w-9 h-9 rounded-md border border-white/40 bg-black/60 flex items-center justify-center">
-          {/* inline hub SVG goes here */}
-        </div>
+        <Image
+          src="/our-flow/cards/hub.png"
+          alt="Hub icon"
+          width={40}
+          height={40}
+          className="object-contain"
+          priority
+        />
       </div>
 
       {/* ================= SVG ================= */}

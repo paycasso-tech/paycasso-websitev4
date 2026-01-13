@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from "react";
 import { useScroll, useTransform, useSpring } from "framer-motion";
 import dynamic from "next/dynamic";
 import StarBlock from "./StarBlock";
+import StarsBackground from "../shared/StarsBackground";
 
 const StarPath = dynamic(() => import("./StarPath"), { ssr: false });
 
@@ -49,14 +50,33 @@ export default function StarPage() {
     <>
       {/* Section Heading */}
       <div className="relative left-24 max-w-[720px] text-white z-10">
-        <h2 className="text-5xl font-semibold leading-tight">
+        <h2 className="text-5xl font-normal leading-tight">
           The motive is to have{" "}
-          <span className="text-cyan-400">transparent</span> workflow
+          <span className="text-cyan-400 font-extralight">transparent</span>{" "}
+          workflow
         </h2>
       </div>
 
-      <section ref={ref} className="relative h-[150vh] bg-black">
-        <div className="sticky top-0 h-screen">
+      <section
+        ref={ref}
+        className="relative min-h-[160vh] bg-black overflow-hidden"
+      >
+        {/* BACKGROUND IMAGE */}
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/our-flow/stars/starpage-bg.png')",
+          }}
+        />
+
+        {/* ⭐ STARS BACKGROUND */}
+        <StarsBackground />
+
+        {/* DARK OVERLAY */}
+        <div className="absolute inset-0 z-10 bg-linear-to-b from-black/30 via-black/20 to-black/40" />
+
+        {/* STICKY CONTENT */}
+        <div className="sticky top-0 h-screen z-20 overflow-visible">
           <StarPath progress={starProgress} />
 
           <StarBlock

@@ -1,0 +1,12 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #000;
+  color: white;
+  font-family: Inter, system-ui, sans-serif;
+}
+
+canvas {
+  image-rendering: crisp-edges;
+}

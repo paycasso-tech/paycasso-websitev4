@@ -1,0 +1,9 @@
+
+{
+  "name": "TransactChat Pro",
+  "description": "A high-density, professional chat interface optimized for transaction management and merchant-customer communication.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

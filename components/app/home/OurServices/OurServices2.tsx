@@ -1,5 +1,5 @@
 "use client";
-import SectionUnderlineLabel from "@/components/app/section-underline-label";
+import SectionUnderlineLabel from "@/components/app/home/OurServices/section-underline-label";
 import Image from "next/image";
 import React from "react";
 
@@ -50,7 +50,11 @@ export default function OurServices() {
         <div className="md:col-span-2 relative">
           <Image
             width={200}
-            height={200} src="/our-services/welcome.svg" className="w-full" alt="" />
+            height={200}
+            src="/our-services/welcome.svg"
+            className="w-full"
+            alt=""
+          />
           <div ref={paycassoRef}>
             <Image
               alt=""
@@ -171,10 +175,11 @@ export default function OurServices() {
         height={200}
         alt=""
         src="/our-services/services-background.svg"
-        className={`absolute w-full z-1 bottom-0 transition-all duration-700 ease-[cubic-bezier(0.45,0,0.55,1)] ${isVisible
-          ? "opacity-100 transform translate-y-0"
-          : "opacity-0 transform translate-y-32"
-          }`}
+        className={`absolute w-full z-1 bottom-0 transition-all duration-700 ease-[cubic-bezier(0.45,0,0.55,1)] ${
+          isVisible
+            ? "opacity-100 transform translate-y-0"
+            : "opacity-0 transform translate-y-32"
+        }`}
       />
     </div>
   );

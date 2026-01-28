@@ -79,7 +79,7 @@ export default function Login({
       setMessage({ success: "Login successful! Redirecting..." });
 
       setTimeout(() => {
-        router.push("/experience");
+        router.push("/dashboard");
       }, 1000);
     } catch (error) {
       console.error("Sign in error:", error);

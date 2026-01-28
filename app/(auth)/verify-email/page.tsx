@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { SubmitButton } from "@/components/auth/submit-button";
 
 function VerifyEmailContent() {
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState("000000");
   const [message, setMessage] = useState<{
     type: "error" | "success";
     text: string;

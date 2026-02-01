@@ -1,16 +1,15 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion } from "motion/react";
+import type { Transition } from "motion/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
-const transition = {
+const transition: Transition = {
   type: "spring",
   mass: 0.5,
   damping: 11.5,
   stiffness: 100,
-  restDelta: 0.001,
-  restSpeed: 0.001,
 };
 
 export const MenuItem = ({
@@ -27,13 +26,12 @@ export const MenuItem = ({
   route: string;
 }) => {
   const router = useRouter();
+
   return (
     <div
       onMouseEnter={() => setActive(item)}
+      onClick={() => router.push(route)}
       className="relative"
-      onClick={() => {
-        router.push(route);
-      }}
     >
       <motion.p
         transition={{ duration: 0.3 }}
@@ -41,29 +39,19 @@ export const MenuItem = ({
       >
         {item}
       </motion.p>
-      {/* {active !== null && (
+
+      {active === item && children && (
         <motion.div
-          initial={{ opacity: 0, scale: 0.85, y: 10 }}
+          initial={{ opacity: 0, scale: 0.9, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          transition={transition as any}
+          transition={transition}
+          className="absolute top-[calc(100%_+_1.2rem)] left-1/2 -translate-x-1/2"
         >
-          {active === item && (
-            <div className="absolute top-[calc(100%_+_1.2rem)] left-1/2 transform -translate-x-1/2 pt-4">
-              <motion.div
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                transition={transition as any}
-                layoutId="active"
-                className="bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 shadow-xl"
-              >
-                <motion.div layout className="w-max h-full p-4">
-                  {children}
-                </motion.div>
-              </motion.div>
-            </div>
-          )}
+          <div className="bg-white/90 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 shadow-xl">
+            {children}
+          </div>
         </motion.div>
-      )} */}
+      )}
     </div>
   );
 };
@@ -75,72 +63,30 @@ export const Menu = ({
   setActive: (item: string | null) => void;
   children: React.ReactNode;
 }) => {
-  const [scrollY, setScrollY] = useState(0);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      setScrollY(currentScrollY);
-      setIsScrolled(currentScrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Calculate width based on scroll position
-  const getNavbarWidth = () => {
-    const maxScroll = 500; // Maximum scroll distance to consider
-    const minWidth = 650; // Initial width in pixels
-    const maxWidth = 480; // Final expanded width in pixels
-
-    const scrollProgress = Math.min(scrollY / maxScroll, 1);
-    const currentWidth = minWidth + (maxWidth - minWidth) * scrollProgress;
-
-    return `${currentWidth}px`;
-  };
-
-  // Calculate gap based on scroll position
-  const getNavbarGap = () => {
-    const maxScroll = 500; // Maximum scroll distance to consider
-    const initialGap = 6; // Initial gap (space-x-12 equivalent)
-    const finalGap = 6; // Final gap (space-x-6 equivalent)
-
-    const scrollProgress = Math.min(scrollY / maxScroll, 1);
-    const currentGap = initialGap - (initialGap - finalGap) * scrollProgress;
-
-    return `${currentGap * 0.25}rem`; // Convert to rem (Tailwind uses 0.25rem per unit)
-  };
-
   return (
-    <motion.nav
+    <nav
       onMouseLeave={() => setActive(null)}
-      animate={{
-        width: getNavbarWidth(),
-        backdropFilter: isScrolled ? "blur(24px)" : "blur(12px)",
-        gap: getNavbarGap(),
-      }}
-      transition={{
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-        duration: 0.3,
-      }}
-      className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-full
-                 border border-white/10 shadow-xl backdrop-blur-lg
-                 flex justify-center items-center px-8 py-4"
+      className="
+        fixed top-4 left-1/2 -translate-x-1/2 z-50
+        flex items-center justify-center gap-8
+        px-8 py-4
+        rounded-full
+        border border-white/10
+        backdrop-blur-lg
+        shadow-xl
+      "
       style={{
-        background: "rgba(255,255,255,0.05)", // more transparent
-        boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.22)",
-        gap: getNavbarGap(),
+        background: "rgba(255,255,255,0.05)",
+        boxShadow: "0 8px 32px rgba(31,38,135,0.22)",
+        width: "580px",
       }}
     >
       {children}
-    </motion.nav>
+    </nav>
   );
 };
 
+/* Optional exports unchanged */
 export const ProductItem = ({
   title,
   description,
@@ -159,27 +105,12 @@ export const ProductItem = ({
         width={140}
         height={70}
         alt={title}
-        className="shrink-0 rounded-md shadow-2xl group-hover:shadow-white/20 transition-shadow duration-300"
+        className="shrink-0 rounded-md shadow-2xl"
       />
       <div>
-        <h4 className="text-xl font-bold mb-1 text-white group-hover:text-gray-200 transition-colors duration-300">
-          {title}
-        </h4>
-        <p className="text-gray-300 text-sm max-w-40 group-hover:text-gray-100 transition-colors duration-300">
-          {description}
-        </p>
+        <h4 className="text-xl font-bold mb-1 text-white">{title}</h4>
+        <p className="text-gray-300 text-sm max-w-40">{description}</p>
       </div>
-    </a>
-  );
-};
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const HoveredLink = ({ children, ...rest }: any) => {
-  return (
-    <a
-      {...rest}
-      className="text-gray-300 hover:text-white transition-colors duration-300 hover:underline underline-offset-4"
-    >
-      {children}
     </a>
   );
 };

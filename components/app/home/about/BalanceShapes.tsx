@@ -44,7 +44,7 @@ export default function BalanceShapes() {
           width={320}
           height={420}
           priority
-          className="drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)]"
+          className="drop-shadow-[0_30px_60px_rgba(0,0,0,0.6)] saturate-75 hue-rotate-[-10deg] brightness-95 contrast-105"
         />
       </div>
     </div>

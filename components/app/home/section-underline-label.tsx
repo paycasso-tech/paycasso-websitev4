@@ -1,7 +1,7 @@
 export default function SectionUnderlineLabel({ title }: { title: string }) {
   return (
-    <div className="w-full flex flex-col justify-center items-center my-5  md:my-10">
-      <h1 className="mb-5 text-white text-3xl pb-3 md:pb md:text-4xl lg:text-5xl font-medium w-full text-center">
+    <div className="w-full flex flex-col justify-center items-center my-5 md:my-10 pb-5 md:pb-0">
+      <h1 className="md:mb-5 text-white text-3xl pb-3 md:pb md:text-4xl lg:text-5xl font-medium w-full text-center">
         {title}
       </h1>
       <div

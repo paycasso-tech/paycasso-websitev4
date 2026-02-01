@@ -219,3 +219,17 @@
     transform: translateY(-50%) translateX(10px);
   }
 }
+
+@keyframes marquee-horizontal {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-horizontal {
+  animation: marquee-horizontal var(--duration, 30s) linear infinite;
+  will-change: transform;
+}

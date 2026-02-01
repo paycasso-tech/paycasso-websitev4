@@ -91,7 +91,7 @@ export default function Footer() {
 
           {/* FAQ */}
           <div className="text-center md:text-left md:flex md:justify-end">
-            <div className="space-y-2 max-w-xs">
+            <div className="space-y-2">
               <h3 className="text-white text-lg font-semibold">
                 {FOOTER_CONTENT.faq.title}
               </h3>

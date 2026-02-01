@@ -143,7 +143,7 @@ function MobileNavButton({
         px-4 py-2
         rounded-full
         transition-all duration-300 ease-out
-        overflow-hidden
+        overflow-hidden justify-center
       `,
         active
           ? "grow bg-white/15 text-white"

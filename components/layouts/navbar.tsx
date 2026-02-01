@@ -7,18 +7,31 @@ import LogoSection from "../shared/icons/logo-section";
 import { Menu, MenuItem } from "./navbar-menu";
 import { Button } from "../ui/button";
 import { IoArrowRedoCircleOutline } from "react-icons/io5";
-import { Home, Layers, Workflow, LayoutGrid } from "lucide-react";
+import { Layers, Workflow, LayoutGrid } from "lucide-react";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
+type MobileItem = "home" | "how" | "flow" | "app";
 
 export default function Navbar({ className }: { className?: string }) {
   const [active, setActive] = useState<string | null>(null);
+  const pathname = usePathname();
+
+  const activeMobile: MobileItem =
+    pathname === "/how-it-works"
+      ? "how"
+      : pathname === "/our-flow"
+        ? "flow"
+        : pathname === "/dashboard"
+          ? "app"
+          : "home";
 
   return (
     <>
-      {/* ================= DESKTOP / TABLET NAVBAR ================= */}
+      {/* ================= DESKTOP NAVBAR (UNCHANGED) ================= */}
       <div
         className={cn(
-          "hidden md:flex fixed top-2 inset-x-0 max-w-3xl mx-auto z-50 items-center justify-center",
+          "hidden md:flex fixed top-2 inset-x-0 z-50 items-center justify-center",
           className,
         )}
       >
@@ -28,12 +41,6 @@ export default function Navbar({ className }: { className?: string }) {
           </div>
 
           <div className="flex flex-row gap-x-8 whitespace-nowrap items-center">
-            <MenuItem
-              setActive={setActive}
-              active={active}
-              item="Home"
-              route="/"
-            />
             <MenuItem
               setActive={setActive}
               active={active}
@@ -48,7 +55,7 @@ export default function Navbar({ className }: { className?: string }) {
             />
 
             <Link href="/dashboard">
-              <Button className="py-3 px-4 bg-white text-black font-semibold text-md rounded-4xl hover:bg-gray-300">
+              <Button className="py-3 px-4 bg-white text-black font-semibold rounded-4xl flex items-center gap-2">
                 Get App
                 <IoArrowRedoCircleOutline />
               </Button>
@@ -57,36 +64,56 @@ export default function Navbar({ className }: { className?: string }) {
         </Menu>
       </div>
 
-      {/* ================= MOBILE BOTTOM NAVBAR ================= */}
-      <nav className="md:hidden fixed bottom-0 inset-x-0 z-50 h-16 bg-black/90 backdrop-blur border-t border-white/10">
-        <div className="flex h-full items-center justify-around text-xs text-white">
-          <MobileNavItem
+      {/* ================= MOBILE EXPANDABLE PILL NAVBAR ================= */}
+      <nav className="md:hidden fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
+        <div
+          className="
+            flex items-center gap-2
+            px-2 py-2
+            w-[92vw] max-w-sm
+            rounded-full
+            border border-white/10
+            backdrop-blur-lg
+            shadow-xl
+          "
+          style={{
+            background: "rgba(255,255,255,0.06)",
+            boxShadow: "0 8px 32px rgba(31,38,135,0.25)",
+          }}
+        >
+          <MobileNavButton
+            active={activeMobile === "home"}
             href="/"
             icon={
               <Image
                 src="/logoFrameEagle.png"
                 alt="Paycasso"
-                width={50}
-                height={50}
-                className="h-auto"
+                width={22}
+                height={22}
               />
             }
-            label=""
+            label="Paycasso"
           />
-          <MobileNavItem
+
+          <MobileNavButton
+            active={activeMobile === "how"}
             href="/how-it-works"
-            icon={<Layers size={35} />}
-            label=""
+            icon={<Layers size={20} />}
+            label="How it works"
           />
-          <MobileNavItem
+
+          <MobileNavButton
+            active={activeMobile === "flow"}
             href="/our-flow"
-            icon={<Workflow size={35} />}
-            label=""
+            icon={<Workflow size={20} />}
+            label="Our Flow"
           />
-          <MobileNavItem
+
+          <MobileNavButton
+            active={activeMobile === "app"}
             href="/dashboard"
-            icon={<LayoutGrid size={35} />}
-            label=""
+            icon={<LayoutGrid size={20} />}
+            label="Get App"
           />
         </div>
       </nav>
@@ -94,22 +121,45 @@ export default function Navbar({ className }: { className?: string }) {
   );
 }
 
-function MobileNavItem({
+/* ================= MOBILE NAV ITEM ================= */
+
+function MobileNavButton({
   href,
   icon,
   label,
+  active,
 }: {
   href: string;
   icon: React.ReactNode;
   label: string;
+  active: boolean;
 }) {
   return (
     <Link
       href={href}
-      className="flex flex-col items-center justify-center gap-1 text-white/80 hover:text-white"
+      className={cn(
+        `
+        flex items-center gap-2
+        px-4 py-2
+        rounded-full
+        transition-all duration-300 ease-out
+        overflow-hidden
+      `,
+        active
+          ? "grow bg-white/15 text-white"
+          : "grow-0 text-white/70 hover:text-white",
+      )}
     >
-      {icon}
-      <span className="text-[11px]">{label}</span>
+      <div className="shrink-0">{icon}</div>
+
+      <span
+        className={cn(
+          "text-sm whitespace-nowrap transition-all duration-300",
+          active ? "opacity-100 max-w-[120px]" : "opacity-0 max-w-0",
+        )}
+      >
+        {label}
+      </span>
     </Link>
   );
 }

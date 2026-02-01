@@ -1,159 +1,165 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import { IconBrandOpenai } from "@tabler/icons-react";
 import { SiHuggingface } from "react-icons/si";
 
 type Props = {
-  card: any;
-  index: number;
-  isInView: boolean;
-  hoveredCard: number | null;
-  setHoveredCard: (id: number | null) => void;
-  safeEmails: string[][];
+  type: "dual" | "dispute" | "pocket" | "ai";
+  large?: boolean;
+  animate?: boolean;
 };
 
-function WhyChooseUsCard({
-  card,
-  index,
-  isInView,
-  hoveredCard,
-  setHoveredCard,
-  safeEmails,
-}: Props) {
+export default function WhyChooseUsCard({ type, large, animate }: Props) {
   return (
     <div
-      className={`${card.mobileSpan ?? "col-span-2"} md:${card.colSpan}
-        relative bg-neutral-950/80
-        backdrop-blur-none md:backdrop-blur-sm
-        border border-neutral-800/50
-        flex flex-col justify-between
-        h-auto md:h-96 lg:h-112
-        rounded-2xl overflow-hidden
-        group transition-all duration-700
-        md:hover:border-blue-500/30
-        md:hover:shadow-2xl md:hover:shadow-blue-500/10
-        ${isInView ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"}
+      className={`
+        relative overflow-hidden rounded-2xl
+        border border-neutral-800
+        bg-neutral-950/90 backdrop-blur-sm
+        transition-all duration-700
+        ${large ? "min-h-[360px]" : "min-h-[220px]"}
+        ${animate ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}
       `}
-      style={{
-        transitionDelay: `${index * 150}ms`,
-        ...(card.bgImage && {
-          backgroundImage: "url('/website/pocket-friendly.svg')",
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }),
-      }}
-      onMouseEnter={() => setHoveredCard(card.id)}
-      onMouseLeave={() => setHoveredCard(null)}
     >
-      <div className="absolute inset-0 bg-linear-to-br from-blue-500/5 via-transparent to-purple-500/5 opacity-0 md:group-hover:opacity-100 transition-opacity duration-500" />
+      {/* ========== CARD 1 ========= */}
+      {type === "dual" && (
+        <div className="p-6 flex flex-col h-full justify-between">
+          <div>
+            <h3 className="text-md md:text-lg font-semibold text-white">
+              Dual Sided Protection
+            </h3>
 
-      <div className="relative z-10 space-y-4 p-4 md:p-6 lg:p-7">
-        <div className="flex items-center gap-2">
-          <Image
-            src={card.icon}
-            width={20}
-            height={20}
-            alt=""
-            className="object-contain"
-          />
-          <h3 className="font-bold text-lg md:text-xl text-white">
-            {card.title}
-          </h3>
-        </div>
-        {card.description && <div>{card.description}</div>}
-      </div>
+            <p className="mt-3 text-xs md:text-sm text-[#B8B8B8] lg:max-w-sm">
+              Fairness guaranteed for{" "}
+              <span className="text-white font-medium">both sides.</span>
+            </p>
+            <p className="text-xs md:text-sm text-[#B8B8B8] lg:max-w-sm">
+              Funds locked in{" "}
+              <span className="text-white font-medium">
+                smart escrow contract
+              </span>{" "}
+              until milestones are completed.
+            </p>
+          </div>
 
-      {card.features && (
-        <div className="px-4 md:px-6 lg:px-7 pb-6 md:pb-0">
-          <ul className="text-xs font-medium md:text-sm md:space-y-1 md:text-neutral-300">
-            {card.features.map((f: string, i: number) => (
-              <li
-                key={i}
-                className={`pb-1 md:pb-4 transition-all duration-500 ${
-                  hoveredCard === card.id
-                    ? "md:translate-x-2 md:text-green-400"
-                    : ""
-                }`}
-              >
-                {f}
-              </li>
-            ))}
+          <ul className="mt-6 space-y-2 text-xs md:text-sm text-[#B8B8B8]">
+            <li>
+              <span className="text-green-400">✓</span> 100% user friendly
+            </li>
+            <li>
+              <span className="text-green-400">✓</span> Will become your
+              companion
+            </li>
+            <li>
+              <span className="text-green-400">✓</span> Easy to use
+            </li>
           </ul>
+          {/* image for desktop */}
+          <Image
+            src="/website/lock-vector.svg"
+            width={140}
+            height={240}
+            alt=""
+            className="hidden md:block absolute right-4 -bottom-14 -translate-y-1/2 opacity-50 "
+          />
+          {/* image for mobile */}
+          <Image
+            src="/website/lock-vector.svg"
+            width={100}
+            height={240}
+            alt=""
+            className="block md:hidden absolute right-4 -bottom-10 -translate-y-1/2 opacity-50 "
+          />
         </div>
       )}
 
-      {card.illustration && (
-        <Image
-          width={200}
-          height={200}
-          src={card.illustration}
-          className={`absolute w-full max-w-25 md:max-w-64 right-2 md:right-4 top-28 md:top-1/2 md:-translate-y-1/3 opacity-30 md:group-hover:opacity-50 transition-all duration-500 ${
-            hoveredCard === card.id ? "md:scale-110 md:rotate-3" : ""
-          }`}
-          alt=""
-        />
-      )}
+      {/* ========== CARD 2 ========= */}
+      {type === "dispute" && (
+        <div className="p-6 h-full">
+          <h3 className="text-md md:text-lg font-semibold text-white">
+            Dispute Resolution with DAOs
+          </h3>
 
-      {card.hasMarquee && safeEmails.length > 0 && (
-        <div className="space-y-3 overflow-hidden pb-3 md:pb-16">
-          {safeEmails.map((row, i) => (
-            <div
-              key={i}
-              className="animate-marquee-horizontal flex gap-3 text-neutral-400"
-              style={
-                { "--duration": `${[60, 30, 45][i]}s` } as React.CSSProperties
-              }
-            >
-              {[...row, ...row].map((email, idx) => (
-                <div
-                  key={idx}
-                  className="py-2 px-4 border rounded-lg border-neutral-700 text-xs whitespace-nowrap"
-                >
-                  {email}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
-
-      {card.hasDispute && (
-        <div className="md:pb-16 px-4 md:px-6 lg:px-7">
           <Image
             src="/website/dispute-resolution.svg"
-            width={200}
-            height={200}
+            width={260}
+            height={160}
             alt=""
-            className="md:opacity-80"
+            className="absolute bottom-0 left-1/2 -translate-x-1/2 opacity-70"
           />
         </div>
       )}
 
-      {card.hasML && (
-        <>
-          <div className="p-4 md:p-6 lg:p-7 text-sm space-y-3">
-            <div className="flex items-center gap-3 text-neutral-300">
-              <IconBrandOpenai className="w-5 h-5" />
-              OpenAI
-            </div>
-            <div className="flex items-center gap-3 text-neutral-300">
-              <SiHuggingface className="w-5 h-5" />
-              Hugging Face
+      {/* ========== CARD 3 ========= */}
+      {type === "pocket" && (
+        <div className="p-6 h-full bg-cover">
+          <h3 className="text-md md:text-lg font-semibold text-white">
+            Your Pocket Friendly Crypto
+          </h3>
+          <Image
+            src="/website/pocket-friendly.svg"
+            width={260}
+            height={160}
+            alt=""
+            className="absolute -bottom-14 left-1/2 -translate-x-1/2 opacity-70"
+          />
+        </div>
+      )}
+
+      {/* ========== CARD 4 (FIXED AS PER FIGMA) ========= */}
+      {type === "ai" && (
+        <div className="p-6 h-full lg:h-[58vh] flex flex-col justify-between">
+          {/* TOP AI BLOCK */}
+          <div>
+            <h3 className="text-md md:text-lg font-semibold text-white flex items-center gap-2">
+              AI Integration
+            </h3>
+
+            <p className="mt-3 text-sm text-neutral-400 max-w-sm">
+              Integrate your favourite ML-models to{" "}
+              <span className="text-white font-medium">
+                store, index and search vector embeddings
+              </span>
+            </p>
+
+            <div className="mt-4 flex gap-6 text-sm text-neutral-300">
+              <div className="flex items-center gap-2">
+                <IconBrandOpenai size={18} /> OpenAI
+              </div>
+              <div className="flex items-center gap-2">
+                <SiHuggingface size={18} /> Hugging Face
+              </div>
             </div>
           </div>
+
+          {/* DIVIDER */}
+          <div className="my-5 h-px w-full bg-neutral-800" />
+
+          {/* BOTTOM AI BLOCK */}
+          <div className="pb-9">
+            <h4 className="text-md md:text-lg font-semibold text-white flex items-center gap-2">
+              AI Integration
+            </h4>
+
+            <p className="mt-2 text-sm text-neutral-400 max-w-sm">
+              Funds are secured in{" "}
+              <span className="text-white font-medium">
+                decentralized escrow
+              </span>{" "}
+              until tasks are verified
+            </p>
+          </div>
+
+          {/* CUBE */}
           <Image
             src="/website/ml-models.svg"
-            width={200}
-            height={200}
+            width={260}
+            height={260}
             alt=""
-            className="absolute h-full w-auto -bottom-7 right-0 opacity-20"
+            className="absolute -bottom-23 right-0 opacity-55 pointer-events-none"
           />
-        </>
+        </div>
       )}
     </div>
   );
 }
-
-export default React.memo(WhyChooseUsCard);

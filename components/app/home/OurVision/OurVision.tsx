@@ -141,7 +141,7 @@ export default function VisionSection() {
               <Image
                 src="/just-logo.svg"
                 alt="Paycasso Logo"
-                width={720} // slightly reduced
+                width={400} // slightly reduced
                 height={400}
                 draggable={false}
                 className="relative z-10 h-auto"
@@ -152,7 +152,7 @@ export default function VisionSection() {
       </div>
 
       {/* ======================= MOBILE (UNCHANGED) ======================= */}
-      <div className="md:hidden px-4 py-20 flex flex-col items-center text-center">
+      <div className="md:hidden px-4 py-10 flex flex-col items-center text-center">
         <SectionLabel className="mb-6 text-base">Our Vision</SectionLabel>
 
         <h2 className="text-3xl font-semibold leading-tight text-white mb-6">

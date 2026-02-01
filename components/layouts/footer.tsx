@@ -41,7 +41,7 @@ export default function Footer() {
     if (!node) return;
     const observer = new IntersectionObserver(
       ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.2 },
+      { threshold: 0.05 },
     );
     observer.observe(node);
     return () => observer.disconnect();
@@ -114,19 +114,21 @@ export default function Footer() {
       </div>
 
       {/* ================= BRAND WORDMARK ================= */}
-      <div className="text-center py-10 overflow-hidden">
+      <div className="text-center py-10">
         <h1
           ref={paycassoRef}
-          className={`text-5xl font-bold sm:text-8xl md:text-8xl lg:text-[9rem] xl:text-[11rem] 2xl:text-[14rem] bg-linear-to-b from-neutral-700 via-neutral-800 duration-1000 transition-all to-neutral-950 bg-clip-text ease-[cubic-bezier(0.45,0,0.55,1)] text-transparent leading-tight 
-            ${
-              isVisible
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-26"
-            }
-          `}
+          className={`text-6xl font-bold sm:text-8xl md:text-8xl lg:text-[9rem] xl:text-[11rem] 2xl:text-[14rem]
+      bg-linear-to-b from-neutral-700 via-neutral-800 to-neutral-950
+      bg-clip-text text-transparent leading-tight
+      transition-all duration-1000 ease-[cubic-bezier(0.45,0,0.55,1)]
+      ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-8 md:-translate-y-24"
+      }
+    `}
         >
-          Paycasso
-          <span className="">.</span>
+          Paycasso<span>.</span>
         </h1>
       </div>
     </footer>

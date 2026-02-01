@@ -7,6 +7,7 @@ import LandingPage from "@/components/our-flow/Landing/LandingPage";
 import CardPage from "@/components/our-flow/Card/CardPage";
 import StarPage from "@/components/our-flow/Star/StarPage";
 import FeedbackPage from "@/components/our-flow/FeedBack/FeedBackPage";
+import Footer from "@/components/layouts/footer";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <CardPage />
       <StarPage />
       <FeedbackPage />
+      <Footer />
     </>
   );
 }

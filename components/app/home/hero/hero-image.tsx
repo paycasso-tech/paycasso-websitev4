@@ -6,18 +6,11 @@ export default function HeroImage() {
       {/* ================= MOBILE HERO IMAGE (CRISP) ================= */}
       <div className="md:hidden w-full mt-10 flex justify-center">
         <div
-          className="
-      w-full max-w-sm
-      rounded-2xl
-      border border-[#FAFAFA40]
-      bg-[#9292920A]
-      p-3
-      shadow-[0_4px_12px_0_#2323234D]
-      overflow-hidden
+          className="w-full max-w-sm rounded-2xl border border-[#FAFAFA40] bg-[#9292920A] p-1 shadow-[0_4px_12px_0_#2323234D] overflow-hidden
     "
         >
           <Image
-            src="/demo2.png"
+            src="/demo2.svg"
             alt="Demo"
             width={900}
             height={560}
@@ -28,26 +21,14 @@ export default function HeroImage() {
       </div>
 
       {/* ================= DESKTOP HERO IMAGE (FIXED) ================= */}
-      <div
-        className="
-    hidden md:flex
-    mx-auto mt-12
-    justify-center items-center
-    w-[970px] h-[640px]
-    rounded-[20px]
-    border border-[#FAFAFA75]
-    bg-[#9292920A]
-    shadow-[0_4px_4px_0_#2323237D,1px_4px_17.1px_0_#FFFFFF0A_inset]
-    p-[19px] py-2
-    overflow-hidden
-  "
-      >
+      <div className="hidden md:flex mx-auto mt-12 justify-center items-center w-full md:max-w-3xl lg:max-w-6xl rounded-[20px] border border-[#FAFAFA75] bg-[#9292920A] shadow-[0_4px_4px_0_#2323237D,1px_4px_17.1px_0_#FFFFFF0A_inset] p-2 overflow-hidden">
         <div className="relative w-full h-full">
           <Image
             src="/demo2.svg"
             alt="Demo"
-            fill
-            className="object-contain rounded-[20px]"
+            width={1100}
+            height={760}
+            className="w-full h-auto rounded-[20px]"
             priority
           />
         </div>

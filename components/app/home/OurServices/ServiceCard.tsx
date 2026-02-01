@@ -17,7 +17,7 @@ export default function ServiceCard({
 }: Props) {
   return (
     <div
-      className="px-3 py-4 md:py-6 space-y-3 border border-neutral-800 rounded-xl bg-black relative overflow-hidden"
+      className="px-3 py-4 md:py-6 space-y-2 lg:space-y-3 border border-neutral-800 rounded-xl bg-black relative overflow-hidden"
       style={
         bgImage
           ? {
@@ -35,11 +35,11 @@ export default function ServiceCard({
           alt=""
           width={48}
           height={48}
-          className="w-12 h-12 mb-5 md:mb-15"
+          className="w-12 h-12 mb-12 md:mb-15"
         />
       </div>
 
-      <h3 className="text-white font-medium text-lg">{title}</h3>
+      <h3 className="text-white font-medium text-lg lg:pt-0">{title}</h3>
       <p className="text-neutral-500 text-sm leading-relaxed">{description}</p>
     </div>
   );

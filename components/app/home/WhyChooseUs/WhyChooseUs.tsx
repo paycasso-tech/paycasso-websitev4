@@ -1,57 +1,59 @@
 "use client";
-import React, { useState, useEffect, useMemo } from "react";
-import SectionUnderlineLabel from "@/components/app/home/OurServices/section-underline-label";
+import React, { useEffect, useState } from "react";
+import SectionUnderlineLabel from "@/components/app/home/section-underline-label";
 import WhyChooseUsCard from "./WhyChooseUsCard";
-import { whyChooseUsCards } from "./whyChooseUsData";
 
 export default function WhyChooseUs() {
-  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [isInView, setIsInView] = useState(false);
-  const [safeEmails, setSafeEmails] = useState<string[][]>([]);
+  const [inView, setInView] = useState(false);
 
   useEffect(() => {
-    const generated = [60, 30, 45].map(() =>
-      Array.from({ length: 20 }).map(
-        () => `user${Math.floor(Math.random() * 9999)}@example.com`,
-      ),
-    );
-    setSafeEmails(generated);
-  }, []);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => entry.isIntersecting && setIsInView(true),
-      { threshold: 0.1 },
-    );
     const el = document.getElementById("why-choose-us");
-    if (el) observer.observe(el);
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => entry.isIntersecting && setInView(true),
+      { threshold: 0.15 },
+    );
+
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
-  const cards = useMemo(() => whyChooseUsCards, []);
-
   return (
-    <div
+    <section
       id="why-choose-us"
-      className="flex flex-col justify-center mt-10 md:mt-20 items-center w-full px-4 md:px-6 lg:px-8"
+      className="w-full px-4 md:px-6 lg:px-8 mt-16 md:mt-28"
     >
-      <SectionUnderlineLabel title="Why Choose Us" />
+      <SectionUnderlineLabel title="Why Choose Us ?" />
 
-      <div className="w-full max-w-5xl md:py-10 pb-4 md:pb-0 ">
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
-          {cards.map((card, index) => (
-            <WhyChooseUsCard
-              key={card.id}
-              card={card}
-              index={index}
-              isInView={isInView}
-              hoveredCard={hoveredCard}
-              setHoveredCard={setHoveredCard}
-              safeEmails={safeEmails}
-            />
-          ))}
+      <div className="mx-auto max-w-5xl lg:mt-10 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* LEFT SIDE */}
+        <div className="grid grid-cols-2 gap-6">
+          {/* Card 1 */}
+          <div className="col-span-2">
+            <WhyChooseUsCard type="dual" animate={inView} />
+          </div>
+
+          {/* Card 2 */}
+          <WhyChooseUsCard type="dispute" animate={inView} />
+
+          {/* Card 3 */}
+          <WhyChooseUsCard type="pocket" animate={inView} />
+        </div>
+
+        {/* RIGHT SIDE */}
+        <div className="flex flex-col gap-6">
+          {/* Paragraph */}
+          <p className="text-sm md:text-base text-[#B8B8B8] leading-relaxed">
+            From day one, we’ve focused on building a foundation of trust. Every
+            feature is designed to protect both sides and ensure confidence in
+            every transaction.
+          </p>
+
+          {/* Card 4 */}
+          <WhyChooseUsCard type="ai" large animate={inView} />
         </div>
       </div>
-    </div>
+    </section>
   );
 }

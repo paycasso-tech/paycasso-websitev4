@@ -11,7 +11,7 @@ export default function HomePage() {
   return (
     <>
       <Navbar />
-      <main className="w-full min-h-screen relative">
+      <main className="w-full min-h-dvh relative bg-[#020202] pb-2 md:pb-0">
         <div className="relative z-10 overflow-hidden">
           <HeroSection />
           <AboutSection />

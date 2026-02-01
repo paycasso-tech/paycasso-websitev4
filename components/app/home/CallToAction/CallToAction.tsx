@@ -11,14 +11,11 @@ export default function CallToAction() {
       <div
         className="
           w-full max-w-2xl
-          py-16 md:py-10
-          px-4 md:px-0
+          py-8 md:py-10
+          px-8 md:px-0
           text-center md:text-left
         "
       >
-        {/* subtle divider – mobile only */}
-        <div className="md:hidden w-full h-px bg-gradient-to-r from-transparent via-white/10 to-transparent mb-8" />
-
         <h2 className="font-bold text-3xl md:text-4xl lg:text-[2.5rem] mb-6">
           Ready to join the revolution?
         </h2>

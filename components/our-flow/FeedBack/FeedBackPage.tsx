@@ -9,7 +9,7 @@ export default function FeedbackPage() {
       <div className="relative z-10 px-24 pt-24">
         {/* Heading (left aligned) */}
         <h1 className="text-5xl font-semibold leading-tight mb-2 max-w-3xl">
-          trustless payments
+          Trustless payments
           <br />
           borderless work, <span className="text-gray-300">ready to join?</span>
         </h1>
@@ -62,11 +62,6 @@ export default function FeedbackPage() {
             </button>
           </form>
         </div>
-      </div>
-
-      {/* BOTTOM LOGO ZONE */}
-      <div className="bottom-0 left-0 w-full h-[45vh] flex justify-center items-end">
-        <AnimatedLogo />
       </div>
     </section>
   );

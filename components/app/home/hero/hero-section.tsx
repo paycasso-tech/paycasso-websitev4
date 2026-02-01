@@ -79,9 +79,9 @@ export default function HeroSection() {
         </div>
 
         {/* Tagline */}
-        <SectionLabel className="hidden md:block text-left md:text-center text-sm md:text-xl mb-8">
+        {/* <SectionLabel className="hidden md:block text-left md:text-center text-sm md:text-xl mb-8">
           Shaping the future of finance together
-        </SectionLabel>
+        </SectionLabel> */}
       </div>
     </section>
   );

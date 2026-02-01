@@ -1,6 +1,6 @@
 "use client";
 
-import SectionUnderlineLabel from "@/components/app/home/OurServices/section-underline-label";
+import SectionUnderlineLabel from "@/components/app/home/section-underline-label";
 import Image from "next/image";
 import React from "react";
 import ServiceCard from "./ServiceCard";
@@ -142,6 +142,7 @@ export default function OurServices() {
             icon="/website/smart-contract-escrow.svg"
             title="Smart Contract Escrow"
             description="Funds locked until work is approved."
+            alignRightIcon
           />
           <ServiceCard
             icon="/our-services/dispute-res.svg"
@@ -152,6 +153,7 @@ export default function OurServices() {
             icon="/our-services/instant-settlement.svg"
             title="Instant USDC Settlements"
             description="Instant global payments via blockchain."
+            alignRightIcon
           />
         </div>
       </div>

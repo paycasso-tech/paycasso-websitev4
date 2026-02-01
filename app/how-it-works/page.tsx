@@ -3,7 +3,7 @@ import Footer from "@/components/layouts/footer";
 import CallToAction from "@/components/app/home/CallToAction/CallToAction";
 import LaptopScreenView from "@/components/app/laptop-screen-view";
 import Navbar from "@/components/layouts/navbar";
-import SectionUnderlineLabel from "@/components/app/home/OurServices/section-underline-label";
+import SectionUnderlineLabel from "@/components/app/home/section-underline-label";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { BlurFade } from "@/components/ui/blur-fade";
